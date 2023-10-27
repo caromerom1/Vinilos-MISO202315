@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -19,16 +22,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.miso2023equipo2.vinilos.ui.theme.Purple300
 import com.miso2023equipo2.vinilos.ui.theme.Purple400
 import com.miso2023equipo2.vinilos.ui.theme.Purple500
 
 enum class ButtonType {
-    PRIMARY, SECONDARY, TERTIARY,
+    PRIMARY, SECONDARY, TERTIARY, ALTERNATIVE,
 }
 
 @Composable
@@ -40,9 +45,16 @@ fun VinylsButton(
     icon: ImageVector? = null,
 ) {
     val hasIcon = icon != null
+
     val shape = if (hasIcon) {
         CircleShape
     } else ButtonDefaults.shape
+
+    val customModifier = if (type == ButtonType.ALTERNATIVE) {
+        modifier.shadow(elevation = 6.dp, shape = shape)
+    } else {
+        modifier
+    }
 
     val padding = if (hasIcon) {
         PaddingValues(start = 0.dp, end = 0.dp, top = 0.dp, bottom = 0.dp)
@@ -51,7 +63,7 @@ fun VinylsButton(
     if (type == ButtonType.SECONDARY) {
         OutlinedButton(
             onClick = onClick,
-            modifier = modifier,
+            modifier = customModifier,
             shape = shape,
             contentPadding = padding
         ) {
@@ -65,12 +77,16 @@ fun VinylsButton(
         onClick = onClick, colors = ButtonDefaults.buttonColors(
             containerColor = when (type) {
                 ButtonType.PRIMARY -> Purple400
+                ButtonType.ALTERNATIVE -> Purple300
                 else -> Color.Transparent
             }, contentColor = when (type) {
                 ButtonType.PRIMARY -> White
+                ButtonType.ALTERNATIVE -> Purple500
                 else -> Purple500
             }
-        ), shape = shape, modifier = modifier
+        ),
+        shape = shape,
+        modifier = customModifier
     ) {
         Box {
             ButtonContent(icon, label, type)
@@ -141,6 +157,16 @@ fun VinylsButtonPreview() {
                     .width(48.dp)
                     .height(48.dp)
             )
+            Spacer(Modifier.height(5.dp))
+            VinylsButton(
+                icon = Icons.Outlined.Create,
+                onClick = { /*TODO*/ },
+                type = ButtonType.ALTERNATIVE,
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp)
+            )
+            Spacer(Modifier.height(5.dp))
         }
     }
 }
