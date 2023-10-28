@@ -37,6 +37,7 @@ fun Item(text: String, imageUrl: String, onClick: () -> Unit) {
             contentDescription = text,
             modifier = Modifier
                 .height(70.dp)
+                .width(70.dp)
         )
         Spacer(Modifier.width(20.dp))
         Text(text = text, fontSize = 20.sp)
