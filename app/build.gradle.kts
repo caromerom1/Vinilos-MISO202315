@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "com.miso2023equipo2.vinilos"
-        minSdk = 28
-        targetSdk = 33
+        minSdk = 21
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
