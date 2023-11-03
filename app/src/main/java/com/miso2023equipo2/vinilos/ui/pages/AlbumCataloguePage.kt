@@ -27,10 +27,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.uistate.AlbumCatalogueUiState
+import com.miso2023equipo2.vinilos.model.Album
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.ErrorScreen
+import com.miso2023equipo2.vinilos.ui.components.ListItem
 import com.miso2023equipo2.vinilos.ui.components.LoadingScreen
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
+import com.miso2023equipo2.vinilos.ui.components.VinylsList
 import com.miso2023equipo2.vinilos.ui.navigation.AppPages
 import com.miso2023equipo2.vinilos.viewmodels.AlbumCatalogueViewModel
 
@@ -47,7 +50,15 @@ fun AlbumCataloguePage(albumCatalogueUiState: AlbumCatalogueUiState,
         )
         when(albumCatalogueUiState){
             is AlbumCatalogueUiState.Loading->LoadingScreen(R.string.loading,modifier = Modifier.fillMaxSize())
-            is AlbumCatalogueUiState.Success->Text(albumCatalogueUiState.albums)
+            is AlbumCatalogueUiState.Success->{
+                var listItem: MutableList<ListItem> = mutableListOf<ListItem>()
+                albumCatalogueUiState.albums.forEach{album->
+                    val listGen=ListItem(album.name,album.cover)
+                    listItem.add(listGen)
+
+                }
+                VinylsList(items=listItem)
+            }
             is AlbumCatalogueUiState.Error->ErrorScreen( R.string.loading_failed_albums,modifier = Modifier.fillMaxSize())
         }
         VinylsButton(
