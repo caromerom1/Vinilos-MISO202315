@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.components
+package com.miso2023equipo2.vinilos.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -26,11 +26,11 @@ fun PreviewList() {
 data class ListItem ( val text: String,val imageUrl: String)
 
 @Composable
-fun VinylsList(items: List<ListItem>) {
+fun VinylsList(onClickItem:()->Unit={},items: List<ListItem>) {
     LazyColumn {
         items.forEach { item ->
             item {
-                Item(text = item.text, imageUrl = item.imageUrl, onClick = {})
+                Item(text = item.text, imageUrl = item.imageUrl, onClick = onClickItem)
             }
         }
     }

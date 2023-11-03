@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.components
+package com.miso2023equipo2.vinilos.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 
 @Composable
 fun Item(text: String, imageUrl: String, onClick: () -> Unit) {
@@ -32,7 +34,8 @@ fun Item(text: String, imageUrl: String, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = imageUrl,
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(imageUrl).build(),
             contentScale = ContentScale.Inside,
             contentDescription = text,
             modifier = Modifier

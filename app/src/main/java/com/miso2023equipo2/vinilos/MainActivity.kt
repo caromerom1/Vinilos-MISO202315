@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.miso2023equipo2.vinilos.navigation.AppNavigation
+import com.miso2023equipo2.vinilos.ui.navigation.AppNavigation
 import com.miso2023equipo2.vinilos.ui.theme.VinilosTheme
 
 class MainActivity : ComponentActivity() {
