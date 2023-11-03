@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.ui.navigation
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -24,18 +23,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.miso2023equipo2.vinilos.ui.pages.AlbumCataloguePage
-import com.miso2023equipo2.vinilos.ui.pages.AlbumDetailPage
+import com.miso2023equipo2.vinilos.ui.pages.album.AlbumCataloguePage
+import com.miso2023equipo2.vinilos.ui.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.ui.pages.HomePage
-import com.miso2023equipo2.vinilos.viewmodels.NavigationViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.viewmodels.AlbumCatalogueViewModel
+import com.miso2023equipo2.vinilos.ui.pages.album.AlbumCatalogueViewModel
 
 @Composable
 fun AppNavigation(
-    viewModel:NavigationViewModel= viewModel(),
+    viewModel: NavigationViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()

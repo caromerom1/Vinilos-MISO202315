@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.viewmodels
+package com.miso2023equipo2.vinilos.ui.pages.album
 
 
 import android.util.Log
@@ -7,8 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miso2023equipo2.vinilos.data.repository.NetworkAlbumsRepository
-import com.miso2023equipo2.vinilos.data.uistate.AlbumCatalogueUiState
+import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
+import com.miso2023equipo2.vinilos.ui.uistate.AlbumCatalogueUiState
 import com.miso2023equipo2.vinilos.network.VinylsApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -18,6 +18,7 @@ import java.io.IOException
 class AlbumCatalogueViewModel : ViewModel(){
     var _uiState: AlbumCatalogueUiState by mutableStateOf(AlbumCatalogueUiState.Loading)
         private set
+
     init{
         getAlbums()
     }
@@ -26,7 +27,7 @@ class AlbumCatalogueViewModel : ViewModel(){
             _uiState= AlbumCatalogueUiState.Loading
 
             _uiState=try{
-                val albumsRepository=NetworkAlbumsRepository()
+                val albumsRepository= AlbumsRepositoryImpl()
                 val listResult=albumsRepository.getAlbums()
                 AlbumCatalogueUiState.Success(
                     listResult

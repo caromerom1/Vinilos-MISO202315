@@ -1,9 +1,9 @@
-package com.miso2023equipo2.vinilos.viewmodels
+package com.miso2023equipo2.vinilos.ui.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import com.miso2023equipo2.vinilos.data.uistate.NavigationUiState
+import com.miso2023equipo2.vinilos.ui.uistate.NavigationUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +15,7 @@ class NavigationViewModel: ViewModel(){
     private val _uiState= MutableStateFlow(NavigationUiState(logged = false))
     val uiState: StateFlow<NavigationUiState> = _uiState.asStateFlow()
     init{
-        _uiState.value=NavigationUiState(logged=false)
+        _uiState.value= NavigationUiState(logged=false)
     }
     fun login(){
         _uiState.update{
