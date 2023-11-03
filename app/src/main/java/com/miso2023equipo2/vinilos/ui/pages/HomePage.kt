@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.pages
+package com.miso2023equipo2.vinilos.ui.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -26,38 +26,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.components.ButtonType
-import com.miso2023equipo2.vinilos.components.VinylsButton
-import com.miso2023equipo2.vinilos.navigation.AppPages
+import com.miso2023equipo2.vinilos.ui.components.ButtonType
+import com.miso2023equipo2.vinilos.ui.components.VinylsButton
+import com.miso2023equipo2.vinilos.ui.navigation.AppPages
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomePage(navController: NavController) {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text("Vinilos")
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = Color.Black,
-                ),
-            )
-        }
-    ) {
-        HomeBodyContent(navController, padding = it)
-    }
-}
 
 @Composable
-fun HomeBodyContent(navController: NavController, padding: PaddingValues) {
+fun HomePage(onClickCollectionistButton:()->Unit={},onClickGuestButton:()->Unit={}) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
+            .fillMaxSize()            ,
     ) {
         Spacer(modifier = Modifier.height(64.dp))
         Image(
@@ -74,7 +54,7 @@ fun HomeBodyContent(navController: NavController, padding: PaddingValues) {
         Text("¿Cómo desea iniciar la aplicación?", fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(32.dp))
         VinylsButton(
-            onClick = { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
+            onClick =  onClickCollectionistButton,
             type = ButtonType.PRIMARY,
             label = "Coleccionista",
             modifier = Modifier
@@ -82,7 +62,7 @@ fun HomeBodyContent(navController: NavController, padding: PaddingValues) {
                 .padding(horizontal = 64.dp, vertical = 0.dp)
         )
         VinylsButton(
-            onClick = { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
+            onClick =  onClickGuestButton ,
             type = ButtonType.TERTIARY,
             label = "Invitado",
             modifier = Modifier
@@ -96,6 +76,6 @@ fun HomeBodyContent(navController: NavController, padding: PaddingValues) {
 @Preview
 @Composable
 fun HomePagePreview() {
-    val navController = rememberNavController()
-    HomePage(navController)
+
+    HomePage()
 }

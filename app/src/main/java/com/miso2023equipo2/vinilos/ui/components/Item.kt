@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.components
+package com.miso2023equipo2.vinilos.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row

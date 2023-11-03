@@ -1,49 +1,43 @@
-package com.miso2023equipo2.vinilos.pages
+package com.miso2023equipo2.vinilos.ui.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.miso2023equipo2.vinilos.components.ButtonType
-import com.miso2023equipo2.vinilos.components.VinylsButton
-import com.miso2023equipo2.vinilos.navigation.AppPages
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AlbumCataloguePage(navController: NavController) {
+fun AlbumDetailPage(navController: NavController, albumId: Int) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
+            TopAppBar(
                 title = {
-                    Text("Álbumes")
+                    Text("Detalle Álbum")
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = Color.Black,
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.Menu,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
@@ -52,31 +46,25 @@ fun AlbumCataloguePage(navController: NavController) {
             )
         }
     ) {
-        AlbumCatalogueBodyContent(navController = navController, padding = it)
+        if (albumId == -1) {
+            Text("Album ID not found", fontWeight = FontWeight.Bold)
+            return@Scaffold
+        }
+        AlbumDetailBodyContent(navController = navController, albumId = albumId, padding = it)
     }
 }
 
 @Composable
-fun AlbumCatalogueBodyContent(navController: NavController, padding: PaddingValues) {
+fun AlbumDetailBodyContent(navController: NavController, albumId: Int, padding: PaddingValues) {
     Column(modifier = Modifier.padding(padding)) {
-        Spacer(modifier = Modifier.height(32.dp))
-        Text("Album Catalogue Page", fontWeight = FontWeight.Bold)
-        VinylsButton(
-            onClick = { navController.popBackStack() },
-            label = "Volver a inicio"
-        )
-        VinylsButton(
-            type = ButtonType.SECONDARY,
-            onClick = { navController.navigate(route = AppPages.AlbumDetailPage.route + "/123") },
-            label = "Ver detalle de un álbum"
-        )
+        Text("Album Detail Page", fontWeight = FontWeight.Bold)
+        Text(text = "Album ID: $albumId", fontWeight = FontWeight.Bold)
     }
 }
 
 @Preview
 @Composable
-fun AlbumCataloguePagePreview() {
+fun AlbumDetailPagePreview() {
     val navController = rememberNavController()
-
-    AlbumCataloguePage(navController = navController)
+    AlbumDetailPage(navController = navController, albumId = 1)
 }
