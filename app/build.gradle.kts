@@ -51,14 +51,14 @@ android {
 }
 
 dependencies {
-    //Coil libreria para cargue de imagenes
-    implementation("io.coil-kt:coil-compose:2.4.0")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
     // Retrofit with Scalar Converter
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    //Kotline serialization
+
+    //Kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation("androidx.navigation:navigation-compose:2.7.5")
