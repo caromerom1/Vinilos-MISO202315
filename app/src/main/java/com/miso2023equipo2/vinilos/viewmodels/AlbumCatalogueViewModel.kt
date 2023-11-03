@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ViewModel
+package com.miso2023equipo2.vinilos.viewmodels
 
 
 import android.util.Log
@@ -7,7 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miso2023equipo2.vinilos.model.Album
 import com.miso2023equipo2.vinilos.network.VinylsApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -19,14 +18,14 @@ sealed interface AlbumCatalogueUiState {
     object Loading : AlbumCatalogueUiState
 }
 class AlbumCatalogueViewModel : ViewModel(){
-    var albumCatalogueUiState:AlbumCatalogueUiState by mutableStateOf(AlbumCatalogueUiState.Loading)
+    var albumCatalogueUiState: AlbumCatalogueUiState by mutableStateOf(AlbumCatalogueUiState.Loading)
         private set
     init{
         getAlbums()
     }
     private fun getAlbums() {
         viewModelScope.launch {
-            albumCatalogueUiState=AlbumCatalogueUiState.Loading
+            albumCatalogueUiState= AlbumCatalogueUiState.Loading
 
             albumCatalogueUiState=try{
                 val listResult=VinylsApi.retrofitService.getAlbums()
