@@ -7,27 +7,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.miso2023equipo2.vinilos.data.uistate.AlbumCatalogueUiState
 import com.miso2023equipo2.vinilos.network.VinylsApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-sealed interface AlbumCatalogueUiState {
-    data class Success(val albums: String) : AlbumCatalogueUiState
-    object Error : AlbumCatalogueUiState
-    object Loading : AlbumCatalogueUiState
-}
+
 class AlbumCatalogueViewModel : ViewModel(){
-    var albumCatalogueUiState: AlbumCatalogueUiState by mutableStateOf(AlbumCatalogueUiState.Loading)
+    var _uiState: AlbumCatalogueUiState by mutableStateOf(AlbumCatalogueUiState.Loading)
         private set
     init{
         getAlbums()
     }
     private fun getAlbums() {
         viewModelScope.launch {
-            albumCatalogueUiState= AlbumCatalogueUiState.Loading
+            _uiState= AlbumCatalogueUiState.Loading
 
-            albumCatalogueUiState=try{
+            _uiState=try{
                 val listResult=VinylsApi.retrofitService.getAlbums()
                 AlbumCatalogueUiState.Success(
                     "Success: ${listResult.size} Mars photos retrieved"

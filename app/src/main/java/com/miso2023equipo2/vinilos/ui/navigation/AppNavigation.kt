@@ -31,6 +31,7 @@ import com.miso2023equipo2.vinilos.viewmodels.NavigationViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.miso2023equipo2.vinilos.R
+import com.miso2023equipo2.vinilos.viewmodels.AlbumCatalogueViewModel
 
 @Composable
 fun AppNavigation(
@@ -67,7 +68,9 @@ fun AppNavigation(
                 )
             }
             composable(route = AppPages.AlbumCataloguePage.name) {
+                val albumCatalogueViewModel: AlbumCatalogueViewModel =viewModel()
                 AlbumCataloguePage(
+                    albumCatalogueUiState=albumCatalogueViewModel._uiState,
                     onBackButton={
                         viewModel.setIconMenu(null)
                         navController.popBackStack()
