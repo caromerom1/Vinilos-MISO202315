@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.navigation
+package com.miso2023equipo2.vinilos.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,12 +23,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.miso2023equipo2.vinilos.ui.pages.album.AlbumCataloguePage
-import com.miso2023equipo2.vinilos.ui.pages.album.AlbumDetailPage
-import com.miso2023equipo2.vinilos.ui.pages.HomePage
+import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
+import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
+import com.miso2023equipo2.vinilos.pages.HomePage
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.miso2023equipo2.vinilos.ui.pages.album.AlbumCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
 
 @Composable
 fun AppNavigation(
@@ -54,7 +54,7 @@ fun AppNavigation(
         ) {
             composable(route = AppPages.HomePage.name) {
                 HomePage(
-                    onClickCollectionistButton={
+                    onClickCollectorButton={
                         viewModel.setIconMenu(Icons.Filled.Menu)
                         navController.navigate(route = AppPages.AlbumCataloguePage.name)
                     },
@@ -89,7 +89,7 @@ fun AppNavigation(
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VinylsAppBar(icon: ImageVector?, currentScreen:AppPages, modifier:Modifier=Modifier){
+fun VinylsAppBar(icon: ImageVector?, currentScreen: AppPages, modifier:Modifier=Modifier){
     CenterAlignedTopAppBar(
         title = {
             Text(stringResource(id = currentScreen.title))

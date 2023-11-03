@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.uistate
+package com.miso2023equipo2.vinilos.navigation.state
 
 import com.miso2023equipo2.vinilos.data.model.Album
 

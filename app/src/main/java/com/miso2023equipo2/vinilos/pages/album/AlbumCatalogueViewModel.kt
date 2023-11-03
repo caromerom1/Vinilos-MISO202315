@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.pages.album
+package com.miso2023equipo2.vinilos.pages.album
 
 
 import android.util.Log
@@ -8,8 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
-import com.miso2023equipo2.vinilos.ui.uistate.AlbumCatalogueUiState
-import com.miso2023equipo2.vinilos.network.VinylsApi
+import com.miso2023equipo2.vinilos.navigation.state.AlbumCatalogueUiState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.pages.album
+package com.miso2023equipo2.vinilos.pages.album
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

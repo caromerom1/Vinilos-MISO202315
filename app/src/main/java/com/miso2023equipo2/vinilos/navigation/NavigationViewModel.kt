@@ -1,9 +1,8 @@
-package com.miso2023equipo2.vinilos.ui.navigation
+package com.miso2023equipo2.vinilos.navigation
 
-import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import com.miso2023equipo2.vinilos.ui.uistate.NavigationUiState
+import com.miso2023equipo2.vinilos.navigation.state.NavigationUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

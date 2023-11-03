@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.navigation
+package com.miso2023equipo2.vinilos.navigation
 
 import androidx.annotation.StringRes
 import com.miso2023equipo2.vinilos.R

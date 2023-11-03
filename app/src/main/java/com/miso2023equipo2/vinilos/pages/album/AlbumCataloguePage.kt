@@ -1,4 +1,4 @@
-package com.miso2023equipo2.vinilos.ui.pages.album
+package com.miso2023equipo2.vinilos.pages.album
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.ui.uistate.AlbumCatalogueUiState
+import com.miso2023equipo2.vinilos.navigation.state.AlbumCatalogueUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.ErrorScreen
 import com.miso2023equipo2.vinilos.ui.components.ListItem
