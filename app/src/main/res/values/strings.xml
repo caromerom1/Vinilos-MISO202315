@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Vinilos</string>
+    <string name="home_title">Vinilos</string>
+    <string name="catalogue_album_title">Álbumes</string>
+    <string name="detail_album_tittle">Detalle Album %s</string>
     <string name="loading_failed_albums">Álbumes no encontrados</string>
     <string name="loading">Loading</string>
+
 </resources>
