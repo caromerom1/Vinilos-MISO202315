@@ -3,6 +3,7 @@ package com.miso2023equipo2.vinilos.ui.pages
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,16 +22,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.miso2023equipo2.vinilos.R
+import com.miso2023equipo2.vinilos.data.uistate.AlbumCatalogueUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
+import com.miso2023equipo2.vinilos.ui.components.ErrorScreen
+import com.miso2023equipo2.vinilos.ui.components.LoadingScreen
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
 import com.miso2023equipo2.vinilos.ui.navigation.AppPages
-
+import com.miso2023equipo2.vinilos.viewmodels.AlbumCatalogueViewModel
 
 
 @Composable
-fun AlbumCataloguePage(onBackButton:()->Unit={},onDetailAlbumButton:()->Unit={}) {
+fun AlbumCataloguePage(albumCatalogueUiState: AlbumCatalogueUiState,
+    onBackButton:()->Unit={},onDetailAlbumButton:()->Unit={}) {
     Column(modifier = Modifier) {
         Spacer(modifier = Modifier.height(32.dp))
         Text("Album Catalogue Page", fontWeight = FontWeight.Bold)
@@ -38,6 +45,11 @@ fun AlbumCataloguePage(onBackButton:()->Unit={},onDetailAlbumButton:()->Unit={})
             onClick =  onBackButton ,
             label = "Volver a inicio"
         )
+        when(albumCatalogueUiState){
+            is AlbumCatalogueUiState.Loading->LoadingScreen(R.string.loading,modifier = Modifier.fillMaxSize())
+            is AlbumCatalogueUiState.Success->Text(albumCatalogueUiState.albums)
+            is AlbumCatalogueUiState.Error->ErrorScreen( R.string.loading_failed_albums,modifier = Modifier.fillMaxSize())
+        }
         VinylsButton(
             type = ButtonType.SECONDARY,
             onClick = onDetailAlbumButton ,
@@ -46,9 +58,11 @@ fun AlbumCataloguePage(onBackButton:()->Unit={},onDetailAlbumButton:()->Unit={})
     }
 }
 
+
+
 @Preview
 @Composable
 fun AlbumCataloguePagePreview() {
-
-    AlbumCataloguePage()
+    val albumCatalogueViewModel: AlbumCatalogueViewModel = viewModel()
+    AlbumCataloguePage(albumCatalogueViewModel._uiState)
 }
