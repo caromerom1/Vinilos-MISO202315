@@ -2,6 +2,7 @@ package com.miso2023equipo2.vinilos.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,81 +20,142 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
-import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
+import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.pages.HomePage
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.currentBackStackEntryAsState
+import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
+import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 
 @Composable
 fun AppNavigation(
+    modifier: Modifier = Modifier,
     viewModel: NavigationViewModel = viewModel(),
-    modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
-    val backStackEntry by navController.currentBackStackEntryAsState()
     val uiState by viewModel.uiState.collectAsState()
-    val currentScreen = AppPages.valueOf(
-        backStackEntry?.destination?.route ?: AppPages.HomePage.name
-    )
-    Scaffold (
-        topBar ={
-            VinylsAppBar(icon=uiState.icon,currentScreen = currentScreen)
+    val backStackEntry by navController.currentBackStackEntryAsState()
+
+    val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
+
+
+    Scaffold(
+        topBar = {
+            VinylsAppBar(icon = uiState.icon, route = route, navController = navController)
         }
 
-    ){  innerPadding->
+    ) { innerPadding ->
 
-        NavHost(navController = navController,
-            startDestination = AppPages.HomePage.name,
-            modifier=modifier.padding(innerPadding)
+        NavHost(
+            navController = navController,
+            startDestination = AppPages.HomePage.route,
+            modifier = modifier.padding(innerPadding)
         ) {
-            composable(route = AppPages.HomePage.name) {
+            composable(route = AppPages.HomePage.route) {
+                viewModel.setIconMenu(null)
                 HomePage(
-                    onClickCollectorButton={
+                    onClickCollectorButton = {
                         viewModel.setIconMenu(Icons.Filled.Menu)
-                        navController.navigate(route = AppPages.AlbumCataloguePage.name)
+                        navController.navigate(route = AppPages.AlbumCataloguePage.route)
                     },
-                    onClickGuestButton={
+                    onClickGuestButton = {
                         viewModel.setIconMenu(Icons.Filled.Menu)
-                        navController.navigate(route = AppPages.AlbumCataloguePage.name)
+                        navController.navigate(route = AppPages.AlbumCataloguePage.route)
                     }
                 )
             }
-            composable(route = AppPages.AlbumCataloguePage.name) {
-                val albumCatalogueViewModel: AlbumCatalogueViewModel =viewModel()
+            composable(route = AppPages.AlbumCataloguePage.route) {
+                val albumCatalogueViewModel: AlbumCatalogueViewModel = viewModel()
+                viewModel.setIconMenu(Icons.Filled.Menu)
+
                 AlbumCataloguePage(
-                    albumCatalogueUiState=albumCatalogueViewModel._uiState,
-                    onBackButton={
-                        viewModel.setIconMenu(null)
+                    albumCatalogueUiState = albumCatalogueViewModel.uiState,
+                    onBackButton = {
                         navController.popBackStack()
                     },
-                    onDetailAlbumButton={
-                        navController.navigate(route = AppPages.AlbumDetailPage.name + "/123")
+                    onDetailAlbumButton = {
+                        navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
                     }
                 )
             }
-            composable(route = AppPages.AlbumDetailPage.name + "/{albumId}", arguments = listOf(
-                navArgument("albumId") { type = NavType.IntType }
-            )) {
-                AlbumDetailPage(navController, it.arguments?.getInt("albumId") ?: -1)
+            composable(
+                route = "${AppPages.AlbumDetailPage.route}/{albumId}",
+                arguments = listOf(navArgument("albumId") { type = NavType.StringType })
+            ) {
+                val albumId = it.arguments?.getString("albumId")
+                if (albumId == null) {
+                    navController.popBackStack()
+                    return@composable
+                }
+
+                viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
+                val albumDetailViewModel: AlbumDetailViewModel = viewModel()
+
+                albumDetailViewModel.getAlbum(albumId)
+
+                AlbumDetailPage(
+                    albumDetailUiState = albumDetailViewModel.uiState,
+                )
             }
         }
 
     }
 
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VinylsAppBar(icon: ImageVector?, currentScreen: AppPages, modifier:Modifier=Modifier){
+fun VinylsAppBar(
+    icon: ImageVector?,
+    route: String,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    val currentScreen = with(route) {
+        when {
+            equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
+            equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
+            startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
+            else -> stringResource(id = R.string.home_title)
+        }
+    }
+
+    if (icon == Icons.Filled.ArrowBack) {
+        TopAppBar(
+            title = {
+                Text(text = currentScreen)
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                titleContentColor = Color.Black,
+            ),
+            navigationIcon = {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = "Localized description"
+                    )
+                }
+            },
+            modifier = modifier,
+        )
+        return
+    }
+
     CenterAlignedTopAppBar(
         title = {
-            Text(stringResource(id = currentScreen.title))
+            Text(text = currentScreen)
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -107,7 +170,7 @@ fun VinylsAppBar(icon: ImageVector?, currentScreen: AppPages, modifier:Modifier=
                     )
                 }
             }
-
-        }
+        },
+        modifier = modifier,
     )
 }

@@ -1,10 +1,7 @@
 package com.miso2023equipo2.vinilos.navigation
 
-import androidx.annotation.StringRes
-import com.miso2023equipo2.vinilos.R
-
-enum class AppPages(@StringRes val title: Int) {
-    HomePage(title=R.string.home_title),
-    AlbumCataloguePage(title=R.string.catalogue_album_title),
-    AlbumDetailPage(title=R.string.detail_album_tittle),
+sealed class AppPages(val route: String) {
+    object HomePage: AppPages(route = "home")
+    object AlbumCataloguePage: AppPages(route = "albumCatalogue")
+    object AlbumDetailPage: AppPages(route = "albumDetail")
 }

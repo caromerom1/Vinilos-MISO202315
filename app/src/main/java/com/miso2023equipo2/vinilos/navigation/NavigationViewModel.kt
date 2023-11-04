@@ -9,23 +9,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 
-
-class NavigationViewModel: ViewModel(){
-    private val _uiState= MutableStateFlow(NavigationUiState(logged = false))
+class NavigationViewModel : ViewModel() {
+    private val _uiState = MutableStateFlow(NavigationUiState(logged = false))
     val uiState: StateFlow<NavigationUiState> = _uiState.asStateFlow()
-    init{
-        _uiState.value= NavigationUiState(logged=false)
-    }
-    fun login(){
-        _uiState.update{
-            currentState->
-            currentState.copy(logged=true)
-        }
-    }
-    fun setIconMenu(icon:ImageVector?){
-        _uiState.update{
-            currentState->
-            currentState.copy(icon=icon)
+
+    fun setIconMenu(icon: ImageVector?) {
+        _uiState.update { currentState ->
+            currentState.copy(icon = icon)
         }
     }
 
