@@ -1,21 +1,34 @@
 package com.miso2023equipo2.vinilos.pages.album
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.navigation.state.AlbumDetailUiState
 import com.miso2023equipo2.vinilos.ui.components.ErrorScreen
 import com.miso2023equipo2.vinilos.ui.components.LoadingScreen
 
+
 @Composable
 fun AlbumDetailPage(
-    albumDetailUiState: AlbumDetailUiState,
+    albumDetailUiState: AlbumDetailUiState
 ) {
-    Column(modifier = Modifier) {
+    Column(modifier = Modifier
+        .verticalScroll(rememberScrollState())) {
         when (albumDetailUiState) {
             is AlbumDetailUiState.Loading -> LoadingScreen(
                 R.string.loading,
@@ -24,23 +37,82 @@ fun AlbumDetailPage(
 
             is AlbumDetailUiState.Success -> {
                 val album = albumDetailUiState.album
-                //TODO: Update this with Album detailed info
-                Column {
-                    Text(text = "Album ID: ${album.id}", fontWeight = FontWeight.Bold)
-                    Text(text = "Album Name: ${album.name}", fontWeight = FontWeight.Bold)
-                    Text(text = "Album Cover: ${album.cover}", fontWeight = FontWeight.Bold)
-                    Text(
-                        text = "Album Description: ${album.description}",
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(text = "Album Genre: ${album.genre}", fontWeight = FontWeight.Bold)
-                    Text(
-                        text = "Album Release Date: ${album.releaseDate}",
-                        fontWeight = FontWeight.Bold
-                    )
 
+
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Box(
+                        modifier = Modifier
+                            .size(200.dp, 200.dp)
+                    ) {
+                        AsyncImage(
+                            model = album.cover,
+                            placeholder = painterResource(id = R.drawable.vinyl),
+                            error = painterResource(id = R.drawable.vinyl),
+                            contentDescription = "Vinyls Logo",
+                            modifier = Modifier
+                                .padding(28.dp)
+                                .size(150.dp)
+                        )
+                    }
+                }
+
+                Column {
+                    Row {
+                        Text(
+                            text = "Nombre:", fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                        Text(
+                            text = album.name, modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
+
+                    Row {
+                        Text(
+                            text = "Descripción:", fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                        Text(
+                            text = album.description, modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
+
+                    Row {
+                        Text(
+                            text = "Fecha de lanzamiento:", fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                        Text(
+                            text = album.releaseDate, modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
+
+                    Row {
+                        Text(
+                            text = "Género:", fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                        Text(
+                            text = album.genre, modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
 
                 }
+
+//
             }
 
             is AlbumDetailUiState.Error -> ErrorScreen(
@@ -50,10 +122,3 @@ fun AlbumDetailPage(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun AlbumDetailPagePreview() {
-//    val navController = rememberNavController()
-//    AlbumDetailPage(navController = navController, albumId = 1)
-//}
