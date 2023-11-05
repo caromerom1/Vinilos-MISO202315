@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.miso2023equipo2.vinilos.R
@@ -37,10 +38,10 @@ fun AlbumDetailPage(
             val album = albumDetailUiState.data
 
             val details = listOf(
-                ItemDetail("Nombre", album.name),
-                ItemDetail("Descripción", album.description),
-                ItemDetail("Fecha de lanzamiento", album.releaseDate, isDate = true),
-                ItemDetail("Género", album.genre),
+                ItemDetail(stringResource(id =R.string.detail_album_label_name ), album.name),
+                ItemDetail(stringResource(id =R.string.detail_album_label_description ), album.description),
+                ItemDetail(stringResource(id =R.string.detail_album_label_date ), album.releaseDate, isDate = true),
+                ItemDetail(stringResource(id =R.string.detail_album_label_genre ), album.genre),
             )
 
 
