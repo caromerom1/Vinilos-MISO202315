@@ -21,6 +21,8 @@ import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.navigation.state.AlbumDetailUiState
 import com.miso2023equipo2.vinilos.ui.components.ErrorScreen
 import com.miso2023equipo2.vinilos.ui.components.LoadingScreen
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Composable
@@ -86,6 +88,9 @@ fun AlbumDetailPage(
                         )
                     }
 
+                    val formattedDate =
+                        ZonedDateTime.parse(album.releaseDate, DateTimeFormatter.ISO_DATE_TIME)
+                            .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                     Row {
                         Text(
                             text = "Fecha de lanzamiento:", fontWeight = FontWeight.Bold,
@@ -93,7 +98,8 @@ fun AlbumDetailPage(
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                         Text(
-                            text = album.releaseDate, modifier = Modifier
+                            text = formattedDate.toString(),
+                            modifier = Modifier
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                     }
