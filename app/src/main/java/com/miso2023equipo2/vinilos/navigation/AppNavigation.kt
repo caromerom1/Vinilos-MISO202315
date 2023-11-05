@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -38,9 +39,11 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
     viewModel: NavigationViewModel = viewModel(),
+
 ) {
-    val navController = rememberNavController()
+
     val uiState by viewModel.uiState.collectAsState()
     val backStackEntry by navController.currentBackStackEntryAsState()
 
@@ -49,7 +52,7 @@ fun AppNavigation(
 
     Scaffold(
         topBar = {
-            VinylsAppBar(icon = uiState.icon, route = route, navController = navController)
+            VinylsAppBar(icon = uiState.icon, iconDescription=uiState.iconDescription,route = route, navController = navController)
         }
 
     ) { innerPadding ->
@@ -116,6 +119,7 @@ fun AppNavigation(
 @Composable
 fun VinylsAppBar(
     icon: ImageVector?,
+    iconDescription:Int?,
     route: String,
     navController: NavController,
     modifier: Modifier = Modifier
@@ -144,7 +148,7 @@ fun VinylsAppBar(
                 }) {
                     Icon(
                         imageVector = icon,
-                        contentDescription = "Localized description"
+                        contentDescription = iconDescription?.let { stringResource(id = it) }
                     )
                 }
             },
@@ -166,7 +170,7 @@ fun VinylsAppBar(
                 if (icon != null) {
                     Icon(
                         imageVector = icon,
-                        contentDescription = "Localized description"
+                        contentDescription = iconDescription?.let { stringResource(id = it) }
                     )
                 }
             }
