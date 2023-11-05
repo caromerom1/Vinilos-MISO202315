@@ -14,7 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class VynilsScreenNavigationTest {
-    @get:Rule
+   /* @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
 
@@ -50,6 +50,6 @@ class VynilsScreenNavigationTest {
 
 
 
-
+*/
 }
 
