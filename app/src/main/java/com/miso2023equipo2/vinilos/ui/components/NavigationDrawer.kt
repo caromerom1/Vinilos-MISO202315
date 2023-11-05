@@ -54,14 +54,10 @@ fun NavigationDrawer() {
                 ) {
                     Text(
                         text = item,
-                        textAlign = TextAlign.Start // You can also explicitly set the text alignment
+                        textAlign = TextAlign.Start
                     )
                 }
             }
-
-//            Text(text = item, modifier = Modifier
-//                .padding(vertical = 10.dp)
-//                .clickable { selectedItem = item })
         }
     }
 
