@@ -7,4 +7,7 @@
     <string name="loading_failed_album">Álbum no encontrado</string>
     <string name="loading">Loading</string>
     <string name="ejemplo">Volver a inicio</string>
+    <string name="principal_menu_icon">Menu principal</string>
+    <string name="collectionist_label">Coleccionista</string>
+    <string name="guessed_label">Invitado</string>
 </resources>

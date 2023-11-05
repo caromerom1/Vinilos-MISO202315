@@ -2,6 +2,7 @@ package com.miso2023equipo2.vinilos.navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
+import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.navigation.state.NavigationUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,7 @@ class NavigationViewModel : ViewModel() {
 
     fun setIconMenu(icon: ImageVector?) {
         _uiState.update { currentState ->
-            currentState.copy(icon = icon)
+            currentState.copy(icon = icon,iconDescription= R.string.principal_menu_icon)
         }
     }
 
