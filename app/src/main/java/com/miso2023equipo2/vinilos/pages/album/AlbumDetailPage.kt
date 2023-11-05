@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -29,8 +30,11 @@ import java.time.format.DateTimeFormatter
 fun AlbumDetailPage(
     albumDetailUiState: AlbumDetailUiState
 ) {
-    Column(modifier = Modifier
-        .verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 8.dp)
+    ) {
         when (albumDetailUiState) {
             is AlbumDetailUiState.Loading -> LoadingScreen(
                 R.string.loading,
@@ -58,7 +62,7 @@ fun AlbumDetailPage(
                             contentDescription = "Vinyls Logo",
                             modifier = Modifier
                                 .padding(28.dp)
-                                .size(150.dp)
+                                .size(160.dp)
                         )
                     }
                 }
@@ -66,8 +70,9 @@ fun AlbumDetailPage(
                 Column {
                     Row {
                         Text(
-                            text = "Nombre:", fontWeight = FontWeight.Bold,
+                            text = "Nombre", fontWeight = FontWeight.Bold,
                             modifier = Modifier
+                                .width(130.dp)
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                         Text(
@@ -78,8 +83,9 @@ fun AlbumDetailPage(
 
                     Row {
                         Text(
-                            text = "Descripción:", fontWeight = FontWeight.Bold,
+                            text = "Descripción", fontWeight = FontWeight.Bold,
                             modifier = Modifier
+                                .width(130.dp)
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                         Text(
@@ -93,21 +99,24 @@ fun AlbumDetailPage(
                             .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                     Row {
                         Text(
-                            text = "Fecha de lanzamiento:", fontWeight = FontWeight.Bold,
+                            text = "Fecha de \nlanzamiento", fontWeight = FontWeight.Bold,
                             modifier = Modifier
+                                .width(130.dp)
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                         Text(
                             text = formattedDate.toString(),
                             modifier = Modifier
+                                .width(130.dp)
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                     }
 
                     Row {
                         Text(
-                            text = "Género:", fontWeight = FontWeight.Bold,
+                            text = "Género", fontWeight = FontWeight.Bold,
                             modifier = Modifier
+                                .width(130.dp)
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
                         Text(
