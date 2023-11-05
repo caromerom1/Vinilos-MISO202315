@@ -62,11 +62,11 @@ fun HomePage(
                 .fillMaxWidth()
                 .padding(horizontal = 64.dp, vertical = 0.dp)
         )
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 
-@Preview
+@Preview (showBackground = true)
 @Composable
 fun HomePagePreview() {
 
