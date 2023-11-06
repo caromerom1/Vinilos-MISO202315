@@ -19,4 +19,14 @@ class NetworkVinylsRepositoryTest {
         }
 
     }
+
+    @Test
+    fun networkVinylsRepository_getAlbum_verifyAlbum(){
+        runTest{
+            val repository=AlbumsRepositoryImpl(
+                vinylsApiService=FakeVinylsApiService()
+            )
+            assertEquals(FakeDataSource.albumList[0],repository.getAlbum("1"))
+        }
+    }
 }
