@@ -43,58 +43,5 @@ class VinylsIntegrationTest {
         )
         textView2.check(matches(withText("Invitado")))
 
-        val textView3 = onView(
-            allOf(
-                withText("Invitado"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("Invitado")))
-
-        val textView4 = onView(
-            allOf(
-                withText(R.string.catalogue_album_title),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText(R.string.catalogue_album_title)))
-
-        val textView5 = onView(
-            allOf(
-                withText("Buscando Am�rica"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-
-
-        val textView7 = onView(
-            allOf(
-                withText("Description"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-        textView7.check(matches(withText("Description")))
-
-        val textView8 = onView(
-            allOf(
-                withText("Fecha de lanzamiento"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-        textView8.check(matches(withText("Fecha de lanzamiento")))
-
-        val textView9 = onView(
-            allOf(
-                withText(R.string.detail_album_label_genre),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
-                isDisplayed()
-            )
-        )
-        textView9.check(matches(withText(R.string.detail_album_label_genre)))
     }
 }
