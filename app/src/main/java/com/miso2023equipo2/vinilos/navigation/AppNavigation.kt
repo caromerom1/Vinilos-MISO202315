@@ -48,7 +48,7 @@ fun AppNavigation(
     navController: NavHostController = rememberNavController(),
     viewModel: NavigationViewModel = viewModel(),
 
-) {
+    ) {
 
     val uiState by viewModel.uiState.collectAsState()
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -62,7 +62,7 @@ fun AppNavigation(
             topBar = {
                 VinylsAppBar(
                     icon = uiState.icon,
-                    iconDescription=uiState.iconDescription,
+                    iconDescription = uiState.iconDescription,
                     route = route,
                     navController = navController,
                     drawerState = drawerState
@@ -130,7 +130,7 @@ fun AppNavigation(
 @Composable
 fun VinylsAppBar(
     icon: ImageVector?,
-    iconDescription:Int?,
+    iconDescription: Int?,
     route: String,
     navController: NavController,
     drawerState: DrawerState,
@@ -197,7 +197,7 @@ fun VinylsAppBar(
                 icon = icon,
                 route = route,
                 drawerState = drawerState,
-                iconDescription=iconDescription
+                iconDescription = iconDescription
             )
         },
         modifier = modifier,
@@ -205,7 +205,12 @@ fun VinylsAppBar(
 }
 
 @Composable
-fun NavigationIcon(icon: ImageVector,iconDescription: Int, route: String, drawerState: DrawerState) {
+fun NavigationIcon(
+    icon: ImageVector,
+    iconDescription: Int?,
+    route: String,
+    drawerState: DrawerState
+) {
     val scope = rememberCoroutineScope()
 
     IconButton(onClick = {
