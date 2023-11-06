@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,20 +45,24 @@ import kotlinx.coroutines.launch
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
     viewModel: NavigationViewModel = viewModel(),
-) {
-    val navController = rememberNavController()
+
+    ) {
+
     val uiState by viewModel.uiState.collectAsState()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
 
+
     NavigationDrawer(navController = navController, drawerState = drawerState) {
         Scaffold(
             topBar = {
                 VinylsAppBar(
                     icon = uiState.icon,
+                    iconDescription = uiState.iconDescription,
                     route = route,
                     navController = navController,
                     drawerState = drawerState
@@ -125,6 +130,7 @@ fun AppNavigation(
 @Composable
 fun VinylsAppBar(
     icon: ImageVector?,
+    iconDescription: Int?,
     route: String,
     navController: NavController,
     drawerState: DrawerState,
@@ -154,7 +160,7 @@ fun VinylsAppBar(
                 }) {
                     Icon(
                         imageVector = icon,
-                        contentDescription = "Localized description"
+                        contentDescription = iconDescription?.let { stringResource(id = it) }
                     )
                 }
             },
@@ -186,10 +192,12 @@ fun VinylsAppBar(
             titleContentColor = Color.Black,
         ),
         navigationIcon = {
+
             NavigationIcon(
                 icon = icon,
                 route = route,
                 drawerState = drawerState,
+                iconDescription = iconDescription
             )
         },
         modifier = modifier,
@@ -197,7 +205,12 @@ fun VinylsAppBar(
 }
 
 @Composable
-fun NavigationIcon(icon: ImageVector, route: String, drawerState: DrawerState) {
+fun NavigationIcon(
+    icon: ImageVector,
+    iconDescription: Int?,
+    route: String,
+    drawerState: DrawerState
+) {
     val scope = rememberCoroutineScope()
 
     IconButton(onClick = {
@@ -208,7 +221,7 @@ fun NavigationIcon(icon: ImageVector, route: String, drawerState: DrawerState) {
     }) {
         Icon(
             imageVector = icon,
-            contentDescription = "Localized description"
+            contentDescription = iconDescription?.let { stringResource(id = it) }
         )
     }
 }

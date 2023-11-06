@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,7 +50,7 @@ fun HomePage(
         VinylsButton(
             onClick = onClickCollectorButton,
             type = ButtonType.PRIMARY,
-            label = "Coleccionista",
+            label = stringResource(id = R.string.collector_label) ,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 64.dp, vertical = 0.dp)
@@ -57,7 +58,7 @@ fun HomePage(
         VinylsButton(
             onClick = onClickGuestButton,
             type = ButtonType.TERTIARY,
-            label = "Invitado",
+            label = stringResource(id = R.string.guessed_label),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 64.dp, vertical = 0.dp)

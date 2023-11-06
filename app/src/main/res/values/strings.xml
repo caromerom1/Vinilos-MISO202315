@@ -5,6 +5,12 @@
     <string name="detail_album_title">Detalle Álbum</string>
     <string name="loading_failed_albums">Álbumes no encontrados</string>
     <string name="loading_failed_album">Álbum no encontrado</string>
-    <string name="loading">Loading</string>
-    <string name="ejemplo">Volver a inicio</string>
+    <string name="loading">Cargando</string>
+    <string name="principal_menu_icon">Menú principal</string>
+    <string name="collector_label">Coleccionista</string>
+    <string name="guessed_label">Invitado</string>
+    <string name="detail_album_label_name">Nombre</string>
+    <string name="detail_album_label_description">Description</string>
+    <string name="detail_album_label_date">Fecha de lanzamiento</string>
+    <string name="detail_album_label_genre">Género</string>
 </resources>
