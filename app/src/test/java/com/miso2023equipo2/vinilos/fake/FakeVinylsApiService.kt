@@ -9,7 +9,8 @@ class FakeVinylsApiService:VinylsApiService{
     }
 
     override suspend fun getAlbum(id: String): Album {
-        TODO("Not yet implemented")
+        val foundAlbum=FakeDataSource.albumList.find{it.id==id.toInt()}
+        return foundAlbum!!
     }
 
 }
