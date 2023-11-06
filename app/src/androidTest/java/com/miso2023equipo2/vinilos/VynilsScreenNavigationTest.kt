@@ -13,8 +13,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class VynilsScreenNavigationTest {
-   /* @get:Rule
+class VinylsScreenNavigationTest {
+    @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
 
@@ -44,12 +44,12 @@ class VynilsScreenNavigationTest {
     }
 
     private fun navigateToAlbumCatalogueScreen(){
-        composeTestRule.onNodeWithStringId(R.string.collectionist_label)
+        composeTestRule.onNodeWithStringId(R.string.collector_label)
             .performClick()
     }
 
 
 
-*/
+
 }
 
