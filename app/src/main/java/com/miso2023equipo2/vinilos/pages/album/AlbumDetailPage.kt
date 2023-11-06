@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.pages.album
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

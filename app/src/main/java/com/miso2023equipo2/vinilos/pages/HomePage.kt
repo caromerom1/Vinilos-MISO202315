@@ -50,7 +50,7 @@ fun HomePage(
         VinylsButton(
             onClick = onClickCollectorButton,
             type = ButtonType.PRIMARY,
-            label = stringResource(id = R.string.collectionist_label) ,
+            label = stringResource(id = R.string.collector_label) ,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 64.dp, vertical = 0.dp)
