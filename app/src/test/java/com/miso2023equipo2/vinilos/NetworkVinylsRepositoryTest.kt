@@ -8,6 +8,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.Assert.assertEquals
 class NetworkVinylsRepositoryTest {
+    /** Prueba de sobre  los view Model**/
     @Test
     fun networkVinylsRepository_getAlbums_verifyAlbumList(){
         runTest{
