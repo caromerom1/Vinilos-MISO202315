@@ -16,6 +16,8 @@ To run the app follow these steps:
 
 - Open the latest available version of Android Studio
 
+- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
+
 - Select a device that uses Android SDK 21 or higher.
 
 - Select `app` on the `Run / Debug Configurations` dropdown
@@ -32,6 +34,24 @@ To run the tests follow these steps:
 
 - Open the latest available version of Android Studio
 
+- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
+
 - Open any file containing tests
 
 - Click on the button on the right side of the line number that matches the name of the class that contains tests
+
+## Build App
+
+To build the app follow these steps:
+
+- Open the latest available version of Android Studio
+
+- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
+
+- Click on `build` menu on the top bar
+
+- Hover on Build bundle(s) / APK(s)
+
+- Click on Build APK(s)
+
+- The APK will appear on the following route `app/build/outputs/apk/debug/app-debug.apk`
