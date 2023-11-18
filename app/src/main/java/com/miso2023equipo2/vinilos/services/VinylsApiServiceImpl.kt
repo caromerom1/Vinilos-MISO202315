@@ -5,11 +5,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 
-interface VinylsApiService {
+interface VinylsApiServiceImpl:VinylsApiServiceAdapter {
     @GET("/albums")
-    suspend fun getAlbums(): List<Album>
+    override suspend fun getAlbums(): List<Album>
 
     @GET("/albums/{id}")
-    suspend fun getAlbum(@Path("id") id: String): Album
+    override suspend fun getAlbum(@Path("id") id: String):Album
 }
 

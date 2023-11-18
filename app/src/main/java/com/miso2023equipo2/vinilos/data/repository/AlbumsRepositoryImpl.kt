@@ -1,10 +1,11 @@
 package com.miso2023equipo2.vinilos.data.repository
 
 import com.miso2023equipo2.vinilos.data.model.Album
-import com.miso2023equipo2.vinilos.services.VinylsApiService
+import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
+import com.miso2023equipo2.vinilos.services.VinylsApiServiceImpl
 
 class AlbumsRepositoryImpl(
-    private val vinylsApiService: VinylsApiService
+    private val vinylsApiService: VinylsApiServiceAdapter
 ) : AlbumsRepository {
     override suspend fun getAlbums(): List<Album> {
         return vinylsApiService.getAlbums()
