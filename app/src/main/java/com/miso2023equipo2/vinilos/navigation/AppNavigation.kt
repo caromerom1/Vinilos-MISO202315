@@ -39,6 +39,8 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
 import com.miso2023equipo2.vinilos.ui.components.NavigationDrawer
 import kotlinx.coroutines.launch
 
@@ -95,6 +97,16 @@ fun AppNavigation(
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
+                        }
+                    )
+                }
+                composable(route=AppPages.ArtistCataloguePage.route){
+                    val artistCatalogueViewModel:ArtistCatalogueViewModel=viewModel(factory=ArtistCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    ArtistCataloguePage(
+                        uiState = artistCatalogueViewModel.uiState,
+                        onDetailAlbumButton ={
+                        navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
                         }
                     )
                 }

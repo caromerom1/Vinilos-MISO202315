@@ -37,8 +37,9 @@ fun NavigationDrawer(
 
     val menus = listOf(
         NavigationItem("Álbumes") { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
-        NavigationItem("Artistas") { /*TODO: add route */ },
+        NavigationItem("Artistas") { navController.navigate(route=AppPages.ArtistCataloguePage.route) },
         NavigationItem("Coleccionistas") { /* TODO: add route */ },
+
     )
     ModalNavigationDrawer(
         drawerState = drawerState,
