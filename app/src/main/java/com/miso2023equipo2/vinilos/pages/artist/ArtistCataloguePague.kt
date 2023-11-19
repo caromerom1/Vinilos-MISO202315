@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
@@ -17,7 +16,7 @@ import com.miso2023equipo2.vinilos.ui.components.VinylsList
 @Composable
 fun ArtistCataloguePage(
     uiState: DataUiState<List<Artist>>,
-    onDetailAlbumButton: (id: String) -> Unit
+    onDetailArtistButton: (id: String) -> Unit
 ) {
     Column(modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -34,7 +33,7 @@ fun ArtistCataloguePage(
                 listItem.add(listGen)
 
             }
-            VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
+            VinylsList(listItems = listItem, onClickItem = onDetailArtistButton)
         }
     }
 }
