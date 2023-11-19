@@ -15,5 +15,6 @@
     <string name="detail_album_label_description">Descripción</string>
     <string name="detail_album_label_date">Fecha de lanzamiento</string>
     <string name="detail_artist_label_date">Fecha de creacion</string>
+    <string name="detail_artist_label_albums">Albúmes</string>
     <string name="detail_album_label_genre">Género</string>
 </resources>

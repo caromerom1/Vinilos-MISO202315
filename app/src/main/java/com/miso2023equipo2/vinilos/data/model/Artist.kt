@@ -10,4 +10,5 @@ data class Artist(
     @SerialName("image") val cover: String,
     @SerialName("creationDate") val creationDate: String,
     @SerialName("description") val description: String,
+    @SerialName("albums") val albums:List<Album>
 )
