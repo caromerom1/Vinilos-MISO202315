@@ -155,6 +155,7 @@ fun VinylsAppBar(
         when {
             equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
+            equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             else -> stringResource(id = R.string.home_title)
         }
