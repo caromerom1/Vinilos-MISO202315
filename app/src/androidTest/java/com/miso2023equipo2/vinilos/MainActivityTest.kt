@@ -38,7 +38,7 @@ class MainActivityTest {
 
         val view2 = onView(
             allOf(
-                withContentDescription("Men� principal"),
+                withContentDescription("Menú principal"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.View::class.java))),
                 isDisplayed()
             )

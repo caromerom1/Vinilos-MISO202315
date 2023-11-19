@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -21,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.model.Artist
@@ -30,37 +29,48 @@ import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
 import com.miso2023equipo2.vinilos.ui.components.DetailedList
 import com.miso2023equipo2.vinilos.ui.components.ItemDetail
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import com.miso2023equipo2.vinilos.ui.theme.Purple100
 
 @Composable
 fun ArtistDetailPage(
-    artisDetailUiState:DataUiState<Artist>
-){
+    artisDetailUiState: DataUiState<Artist>
+) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 8.dp)
     ) {
-        DataFetchStates(uiState = artisDetailUiState, errorMessage = R.string.loading_failed_artist) {
+        DataFetchStates(
+            uiState = artisDetailUiState,
+            errorMessage = R.string.loading_failed_artist
+        ) {
             if (artisDetailUiState !is DataUiState.Success) return@DataFetchStates
 
             val artist = artisDetailUiState.data
 
             val details = listOf(
-                ItemDetail(stringResource(id = R.string.detail_album_label_name ), artist.name),
-                ItemDetail(stringResource(id = R.string.detail_album_label_description ), artist.description),
-                ItemDetail(stringResource(id = R.string.detail_artist_label_date ), artist.creationDate, isDate = true),
+                ItemDetail(stringResource(id = R.string.detail_album_label_name), artist.name),
+                ItemDetail(
+                    stringResource(id = R.string.detail_album_label_description),
+                    artist.description
+                ),
+                ItemDetail(
+                    stringResource(id = R.string.detail_artist_label_date),
+                    artist.creationDate,
+                    isDate = true
+                ),
 
-            )
-            val albumDetails=artist.albums.map{
-                        album->
-                     ItemDetail(album.name,album.genre)
-                }
+                )
+            val albumDetails = artist.albums.map { album ->
+                ItemDetail(album.cover, album.name, hasImage = true)
+            }
 
 
 
             Column(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 12.dp)
             ) {
 
                 Box(
@@ -79,31 +89,25 @@ fun ArtistDetailPage(
                 }
                 DetailedList(details = details)
                 Spacer(modifier = Modifier.height(10.dp))
-                Row {
-
-                }
-                Row (
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp) // Ajusta la altura según tus necesidades
-                        .background(color = Color.Gray),
+                        .height(50.dp)
+                        .background(color = Purple100),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Text(
-                        modifier=Modifier.padding(),
-                        text=stringResource(id = R.string.detail_artist_label_albums),
-                        fontWeight = FontWeight.Bold
-
+                        modifier = Modifier.padding(),
+                        text = stringResource(id = R.string.detail_artist_label_albums),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
                     )
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
                 DetailedList(details = albumDetails)
             }
-
-
-
 
 
         }

@@ -92,7 +92,8 @@ fun AppNavigation(
                     )
                 }
                 composable(route = AppPages.AlbumCataloguePage.route) {
-                    val albumCatalogueViewModel: AlbumCatalogueViewModel = viewModel(factory=AlbumCatalogueViewModel.Factory)
+                    val albumCatalogueViewModel: AlbumCatalogueViewModel =
+                        viewModel(factory = AlbumCatalogueViewModel.Factory)
                     viewModel.setIconMenu(Icons.Filled.Menu)
 
                     AlbumCataloguePage(
@@ -102,13 +103,14 @@ fun AppNavigation(
                         }
                     )
                 }
-                composable(route=AppPages.ArtistCataloguePage.route){
-                    val artistCatalogueViewModel:ArtistCatalogueViewModel=viewModel(factory=ArtistCatalogueViewModel.Factory)
+                composable(route = AppPages.ArtistCataloguePage.route) {
+                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
+                        viewModel(factory = ArtistCatalogueViewModel.Factory)
                     viewModel.setIconMenu(Icons.Filled.Menu)
                     ArtistCataloguePage(
                         uiState = artistCatalogueViewModel.uiState,
-                        onDetailButton ={
-                        navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        onDetailButton = {
+                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
                         }
                     )
                 }
@@ -124,7 +126,8 @@ fun AppNavigation(
 
                     viewModel.setIconMenu(Icons.Filled.ArrowBack)
 
-                    val albumDetailViewModel: AlbumDetailViewModel = viewModel(factory=AlbumDetailViewModel.Factory)
+                    val albumDetailViewModel: AlbumDetailViewModel =
+                        viewModel(factory = AlbumDetailViewModel.Factory)
 
                     albumDetailViewModel.getAlbum(albumId)
 
@@ -144,7 +147,8 @@ fun AppNavigation(
 
                     viewModel.setIconMenu(Icons.Filled.ArrowBack)
 
-                    val artistDetailViewModel: ArtistDetailViewModel = viewModel(factory=ArtistDetailViewModel.Factory)
+                    val artistDetailViewModel: ArtistDetailViewModel =
+                        viewModel(factory = ArtistDetailViewModel.Factory)
 
                     artistDetailViewModel.getArtist(artistId)
 
@@ -174,6 +178,8 @@ fun VinylsAppBar(
         when {
             equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
+            equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
+            startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             else -> stringResource(id = R.string.home_title)
         }
