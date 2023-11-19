@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates

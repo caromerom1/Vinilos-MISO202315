@@ -11,13 +11,13 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
-interface AppContainer{
-    val albumsRepository:AlbumsRepository
-    val artistRepository:ArtistRepository
+interface AppContainer {
+    val albumsRepository: AlbumsRepository
+    val artistRepository: ArtistRepository
 }
 
-class DefaultAppContainer:AppContainer{
-    private val baseUrl="https://vinils-backend.onrender.com"
+class DefaultAppContainer : AppContainer {
+    private val baseUrl = "https://vinils-backend.onrender.com"
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -33,13 +33,11 @@ class DefaultAppContainer:AppContainer{
 
     }
 
-    override val albumsRepository: AlbumsRepository by lazy{
+    override val albumsRepository: AlbumsRepository by lazy {
         AlbumsRepositoryImpl(retrofitService)
     }
-    override val artistRepository: ArtistRepository by lazy{
+    override val artistRepository: ArtistRepository by lazy {
         ArtistRepositoryImpl(retrofitService)
     }
-
-
 
 }
