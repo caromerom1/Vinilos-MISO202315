@@ -16,7 +16,7 @@ data class ItemDetail(val name: String, val value: String, val isDate: Boolean =
 
 @Composable
 fun DetailedList(details: List<ItemDetail>) {
-    Column {
+
         details.forEach {
             Row {
                 Text(
@@ -32,5 +32,5 @@ fun DetailedList(details: List<ItemDetail>) {
                 )
             }
         }
-    }
+
 }

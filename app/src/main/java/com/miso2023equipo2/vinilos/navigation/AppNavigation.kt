@@ -39,6 +39,10 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailPage
+import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailViewModel
 import com.miso2023equipo2.vinilos.ui.components.NavigationDrawer
 import kotlinx.coroutines.launch
 
@@ -98,6 +102,16 @@ fun AppNavigation(
                         }
                     )
                 }
+                composable(route=AppPages.ArtistCataloguePage.route){
+                    val artistCatalogueViewModel:ArtistCatalogueViewModel=viewModel(factory=ArtistCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    ArtistCataloguePage(
+                        uiState = artistCatalogueViewModel.uiState,
+                        onDetailButton ={
+                        navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        }
+                    )
+                }
                 composable(
                     route = "${AppPages.AlbumDetailPage.route}/{albumId}",
                     arguments = listOf(navArgument("albumId") { type = NavType.StringType })
@@ -116,6 +130,26 @@ fun AppNavigation(
 
                     AlbumDetailPage(
                         albumDetailUiState = albumDetailViewModel.uiState,
+                    )
+                }
+                composable(
+                    route = "${AppPages.ArtistDetailPage.route}/{artistId}",
+                    arguments = listOf(navArgument("artistId") { type = NavType.StringType })
+                ) {
+                    val artistId = it.arguments?.getString("artistId")
+                    if (artistId == null) {
+                        navController.popBackStack()
+                        return@composable
+                    }
+
+                    viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
+                    val artistDetailViewModel: ArtistDetailViewModel = viewModel(factory=ArtistDetailViewModel.Factory)
+
+                    artistDetailViewModel.getArtist(artistId)
+
+                    ArtistDetailPage(
+                        artisDetailUiState = artistDetailViewModel.uiState,
                     )
                 }
             }

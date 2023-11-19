@@ -45,13 +45,12 @@ fun AlbumDetailPage(
 
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
 
                 Box(
-                    modifier = Modifier
-                        .size(200.dp, 200.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
                         model = album.cover,
@@ -63,8 +62,9 @@ fun AlbumDetailPage(
                             .size(160.dp)
                     )
                 }
+                DetailedList(details = details)
             }
-            DetailedList(details = details)
+
         }
     }
 }
