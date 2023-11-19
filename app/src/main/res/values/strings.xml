@@ -12,7 +12,8 @@
     <string name="collector_label">Coleccionista</string>
     <string name="guessed_label">Invitado</string>
     <string name="detail_album_label_name">Nombre</string>
-    <string name="detail_album_label_description">Description</string>
+    <string name="detail_album_label_description">Descripción</string>
     <string name="detail_album_label_date">Fecha de lanzamiento</string>
+    <string name="detail_artist_label_date">Fecha de creacion</string>
     <string name="detail_album_label_genre">Género</string>
 </resources>

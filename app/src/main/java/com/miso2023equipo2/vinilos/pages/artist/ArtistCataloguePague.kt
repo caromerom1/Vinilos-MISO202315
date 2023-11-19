@@ -17,7 +17,7 @@ import com.miso2023equipo2.vinilos.ui.components.VinylsList
 @Composable
 fun ArtistCataloguePage(
     uiState: DataUiState<List<Artist>>,
-    onDetailAlbumButton: (id: String) -> Unit
+    onDetailButton: (id: String) -> Unit
 ) {
     Column(modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -34,7 +34,7 @@ fun ArtistCataloguePage(
                 listItem.add(listGen)
 
             }
-            VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
+            VinylsList(listItems = listItem, onClickItem = onDetailButton)
         }
     }
 }
