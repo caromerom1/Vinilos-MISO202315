@@ -39,6 +39,8 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
+import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
 import com.miso2023equipo2.vinilos.ui.components.NavigationDrawer
 import kotlinx.coroutines.launch
 
@@ -88,12 +90,24 @@ fun AppNavigation(
                     )
                 }
                 composable(route = AppPages.AlbumCataloguePage.route) {
-                    val albumCatalogueViewModel: AlbumCatalogueViewModel = viewModel(factory=AlbumCatalogueViewModel.Factory)
+                    val albumCatalogueViewModel: AlbumCatalogueViewModel =
+                        viewModel(factory = AlbumCatalogueViewModel.Factory)
                     viewModel.setIconMenu(Icons.Filled.Menu)
 
                     AlbumCataloguePage(
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
+                            navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
+                        }
+                    )
+                }
+                composable(route = AppPages.ArtistCataloguePage.route) {
+                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
+                        viewModel(factory = ArtistCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    ArtistCataloguePage(
+                        uiState = artistCatalogueViewModel.uiState,
+                        onDetailArtistButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
                         }
                     )
@@ -110,7 +124,8 @@ fun AppNavigation(
 
                     viewModel.setIconMenu(Icons.Filled.ArrowBack)
 
-                    val albumDetailViewModel: AlbumDetailViewModel = viewModel(factory=AlbumDetailViewModel.Factory)
+                    val albumDetailViewModel: AlbumDetailViewModel =
+                        viewModel(factory = AlbumDetailViewModel.Factory)
 
                     albumDetailViewModel.getAlbum(albumId)
 
@@ -140,6 +155,7 @@ fun VinylsAppBar(
         when {
             equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
+            equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             else -> stringResource(id = R.string.home_title)
         }
