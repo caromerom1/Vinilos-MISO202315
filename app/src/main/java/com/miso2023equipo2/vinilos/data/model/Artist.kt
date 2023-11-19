@@ -8,5 +8,7 @@ data class Artist(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("image") val cover: String,
-    @SerialName("creationDate") val releaseDate: String,
+    @SerialName("creationDate") val creationDate: String,
+    @SerialName("description") val description: String,
+    @SerialName("albums") val albums:List<Album>
 )

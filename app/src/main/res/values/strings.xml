@@ -3,6 +3,7 @@
     <string name="home_title">Vinilos</string>
     <string name="catalogue_album_title">Álbumes</string>
     <string name="artist_title">Artistas</string>
+    <string name="detail_artist_title">Detalle Artista</string>
     <string name="detail_album_title">Detalle Álbum</string>
     <string name="loading_failed_albums">Álbumes no encontrados</string>
     <string name="loading_failed_artists">Artistas no encontrados</string>
@@ -13,7 +14,9 @@
     <string name="collector_label">Coleccionista</string>
     <string name="guessed_label">Invitado</string>
     <string name="detail_album_label_name">Nombre</string>
-    <string name="detail_album_label_description">Description</string>
+    <string name="detail_album_label_description">Descripción</string>
     <string name="detail_album_label_date">Fecha de lanzamiento</string>
+    <string name="detail_artist_label_date">Fecha de creación</string>
+    <string name="detail_artist_label_albums">Álbumes</string>
     <string name="detail_album_label_genre">Género</string>
 </resources>

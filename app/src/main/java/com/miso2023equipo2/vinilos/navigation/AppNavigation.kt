@@ -41,6 +41,8 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailPage
+import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailViewModel
 import com.miso2023equipo2.vinilos.ui.components.NavigationDrawer
 import kotlinx.coroutines.launch
 
@@ -107,8 +109,8 @@ fun AppNavigation(
                     viewModel.setIconMenu(Icons.Filled.Menu)
                     ArtistCataloguePage(
                         uiState = artistCatalogueViewModel.uiState,
-                        onDetailArtistButton = {
-                            navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
+                        onDetailButton = {
+                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
                         }
                     )
                 }
@@ -131,6 +133,27 @@ fun AppNavigation(
 
                     AlbumDetailPage(
                         albumDetailUiState = albumDetailViewModel.uiState,
+                    )
+                }
+                composable(
+                    route = "${AppPages.ArtistDetailPage.route}/{artistId}",
+                    arguments = listOf(navArgument("artistId") { type = NavType.StringType })
+                ) {
+                    val artistId = it.arguments?.getString("artistId")
+                    if (artistId == null) {
+                        navController.popBackStack()
+                        return@composable
+                    }
+
+                    viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
+                    val artistDetailViewModel: ArtistDetailViewModel =
+                        viewModel(factory = ArtistDetailViewModel.Factory)
+
+                    artistDetailViewModel.getArtist(artistId)
+
+                    ArtistDetailPage(
+                        artisDetailUiState = artistDetailViewModel.uiState,
                     )
                 }
             }
@@ -156,6 +179,7 @@ fun VinylsAppBar(
             equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
             equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
+            startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             else -> stringResource(id = R.string.home_title)
         }
