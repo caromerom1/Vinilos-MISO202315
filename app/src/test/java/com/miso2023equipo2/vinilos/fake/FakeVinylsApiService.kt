@@ -2,9 +2,11 @@ package com.miso2023equipo2.vinilos.fake
 
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Artist
+import com.miso2023equipo2.vinilos.data.model.Collector
+import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceImpl
 
-class FakeVinylsApiService : VinylsApiServiceImpl {
+class FakeVinylsApiService : VinylsApiServiceAdapter {
     override suspend fun getAlbums(): List<Album> {
         return FakeDataSource.albumList
     }
@@ -18,6 +20,14 @@ class FakeVinylsApiService : VinylsApiServiceImpl {
     }
 
     override suspend fun getArtist(id: String): Artist {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCollectors(): List<Collector> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCollector(id: String): Collector {
         TODO("Not yet implemented")
     }
 
