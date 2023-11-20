@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.compose.ui.res.stringResource
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,9 +11,12 @@ import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
+import okhttp3.internal.wait
 import org.hamcrest.CoreMatchers
 import org.junit.After
 import org.junit.Before
@@ -26,7 +28,7 @@ private const val LAUNCH_TIMEOUT = 6000L
 private const val STRING_TO_BE_TYPED = "UiAutomator"
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
- class ListAlbumTest {
+ class AlbumTest {
 
     private lateinit var device: UiDevice
 
@@ -64,6 +66,19 @@ private const val STRING_TO_BE_TYPED = "UiAutomator"
         val albumsTittle = device.wait(Until.findObject(By.text("Álbumes")),2000)
         val album1=device.findObject(By.text("Con arena nueva"))
         assertEquals("Con arena nueva",album1.text)
+    }
+    @Test
+    fun CheckAlbumDetail(){
+        val collectionistButton =device.wait(Until.findObject(By.text("Coleccionista")),2000)
+        collectionistButton.click()
+        val albumsTittle = device.wait(Until.findObject(By.text("Álbumes")),2000)
+        val album1=device.wait(Until.findObject(By.text("Con arena nueva")),2000)
+        album1.click()
+        val detailTitle=device.wait(Until.findObject(By.text("Detalle Álbum")),2000)
+        val scrollView =device.findObject(By.clazz("android.widget.ScrollView"))
+        //Se espera recibir 9 elementos del detalle contando la portada del album
+        assertEquals(9,scrollView.childCount)
+
     }
 
     /**
