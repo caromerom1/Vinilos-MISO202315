@@ -11,12 +11,8 @@ import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiScrollable
-import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
-import okhttp3.internal.wait
 import org.hamcrest.CoreMatchers
 import org.junit.After
 import org.junit.Before
@@ -25,7 +21,7 @@ import org.junit.runner.RunWith
 
 private const val BASIC_SAMPLE_PACKAGE = "com.miso2023equipo2.vinilos"
 private const val LAUNCH_TIMEOUT = 6000L
-private const val STRING_TO_BE_TYPED = "UiAutomator"
+
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
  class AlbumTest {
@@ -60,17 +56,17 @@ private const val STRING_TO_BE_TYPED = "UiAutomator"
     }
 
     @Test
-    fun CheckAlbumList() {
-        val collectionistButton =device.wait(Until.findObject(By.text("Coleccionista")),2000)
-        collectionistButton.click()
+    fun checkAlbumList() {
+        val collectionButton =device.wait(Until.findObject(By.text("Coleccionista")),2000)
+        collectionButton.click()
         val albumsTittle = device.wait(Until.findObject(By.text("Álbumes")),2000)
         val album1=device.findObject(By.text("Con arena nueva"))
         assertEquals("Con arena nueva",album1.text)
     }
     @Test
-    fun CheckAlbumDetail(){
-        val collectionistButton =device.wait(Until.findObject(By.text("Coleccionista")),2000)
-        collectionistButton.click()
+    fun checkAlbumDetail(){
+        val collectionButton =device.wait(Until.findObject(By.text("Coleccionista")),2000)
+        collectionButton.click()
         val albumsTittle = device.wait(Until.findObject(By.text("Álbumes")),2000)
         val album1=device.wait(Until.findObject(By.text("Con arena nueva")),2000)
         album1.click()

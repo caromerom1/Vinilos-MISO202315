@@ -15,15 +15,15 @@ interface VinylsApiServiceImpl : VinylsApiServiceAdapter {
     override suspend fun getAlbum(@Path("id") id: String): Album
 
     @GET("/bands")
-    override suspend fun getArtists(): List<Artist>;
+    override suspend fun getArtists(): List<Artist>
 
     @GET("/bands/{id}")
-    override suspend fun getArtist(@Path("id") id: String): Artist;
+    override suspend fun getArtist(@Path("id") id: String): Artist
 
     @GET("/collectors")
-    override suspend fun getCollectors(): List<Collector>;
+    override suspend fun getCollectors(): List<Collector>
 
     @GET("/collectors/{id}")
-    override suspend fun getCollector(@Path("id") id: String): Collector;
+    override suspend fun getCollector(@Path("id") id: String): Collector
 }
 

@@ -8,7 +8,6 @@
     <string name="detail_album_title">Detalle Álbum</string>
     <string name="detail_collector_title">Detalle Coleccionista</string>
     <string name="loading_failed_albums">Álbumes no encontrados</string>
-    <string name="loading_failed_artists">Artistas no encontrados</string>
     <string name="loading_failed_album">Álbum no encontrado</string>
     <string name="loading_failed_artist">Artista no encontrado</string>
     <string name="loading">Cargando</string>
