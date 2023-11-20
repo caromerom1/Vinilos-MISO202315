@@ -4,7 +4,6 @@ import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
-import com.miso2023equipo2.vinilos.services.VinylsApiServiceImpl
 
 class FakeVinylsApiService : VinylsApiServiceAdapter {
     override suspend fun getAlbums(): List<Album> {
@@ -12,23 +11,28 @@ class FakeVinylsApiService : VinylsApiServiceAdapter {
     }
 
     override suspend fun getAlbum(id: String): Album {
-        TODO("Not yet implemented")
+        val index = id.toInt() - 1
+        if (index > 2 || index < 1) return FakeDataSource.albumList[0]
+        return FakeDataSource.albumList[index]
     }
 
     override suspend fun getArtists(): List<Artist> {
-        TODO("Not yet implemented")
+        return FakeDataSource.artistList
     }
 
     override suspend fun getArtist(id: String): Artist {
-        TODO("Not yet implemented")
+        val index = id.toInt() - 1
+        if (index > 2 || index < 1) return FakeDataSource.artistList[0]
+        return FakeDataSource.artistList[index]
     }
 
     override suspend fun getCollectors(): List<Collector> {
-        TODO("Not yet implemented")
+        return FakeDataSource.collectorList
     }
 
     override suspend fun getCollector(id: String): Collector {
-        TODO("Not yet implemented")
+        val index = id.toInt() - 1
+        if (index > 2 || index < 1) return FakeDataSource.collectorList[0]
+        return FakeDataSource.collectorList[index]
     }
-
 }

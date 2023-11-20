@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 data class Collector(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
-    @SerialName("telephone") val cover: String,
-    @SerialName("email") val creationDate: String,
+    @SerialName("telephone") val phone: String,
+    @SerialName("email") val email: String,
 )
