@@ -3,9 +3,9 @@ package com.miso2023equipo2.vinilos.fake
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.data.model.Collector
-import com.miso2023equipo2.vinilos.services.VinylsApiServiceImpl
+import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
 
-class FakeVinylsApiService : VinylsApiServiceImpl {
+class FakeVinylsApiService : VinylsApiServiceAdapter {
     override suspend fun getAlbums(): List<Album> {
         return FakeDataSource.albumList
     }
@@ -35,5 +35,4 @@ class FakeVinylsApiService : VinylsApiServiceImpl {
         if (index > 2 || index < 1) return FakeDataSource.collectorList[0]
         return FakeDataSource.collectorList[index]
     }
-
 }
