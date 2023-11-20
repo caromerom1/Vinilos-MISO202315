@@ -12,6 +12,7 @@ import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
+import com.miso2023equipo2.vinilos.ui.components.EmptyItemsScreen
 import com.miso2023equipo2.vinilos.ui.components.ListItem
 import com.miso2023equipo2.vinilos.ui.components.VinylsList
 
@@ -28,6 +29,11 @@ fun AlbumCataloguePage(
             errorMessage = R.string.loading_failed_albums
         ) {
             if (albumCatalogueUiState !is DataUiState.Success) return@DataFetchStates
+
+            if (albumCatalogueUiState.data.isEmpty()) {
+                EmptyItemsScreen(message = R.string.albums_not_found)
+                return@DataFetchStates
+            }
 
             val listItem: MutableList<ListItem> = mutableListOf()
             albumCatalogueUiState.data.forEach { album ->

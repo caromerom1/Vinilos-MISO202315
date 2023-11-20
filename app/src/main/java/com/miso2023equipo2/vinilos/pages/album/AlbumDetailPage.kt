@@ -31,27 +31,36 @@ fun AlbumDetailPage(
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 8.dp)
     ) {
-        DataFetchStates(uiState = albumDetailUiState, errorMessage = R.string.loading_failed_album) {
+        DataFetchStates(
+            uiState = albumDetailUiState,
+            errorMessage = R.string.loading_failed_album
+        ) {
             if (albumDetailUiState !is DataUiState.Success) return@DataFetchStates
 
             val album = albumDetailUiState.data
 
             val details = listOf(
-                ItemDetail(stringResource(id =R.string.detail_album_label_name ), album.name),
-                ItemDetail(stringResource(id =R.string.detail_album_label_description ), album.description),
-                ItemDetail(stringResource(id =R.string.detail_album_label_date ), album.releaseDate, isDate = true),
-                ItemDetail(stringResource(id =R.string.detail_album_label_genre ), album.genre),
+                ItemDetail(stringResource(id = R.string.detail_album_label_name), album.name),
+                ItemDetail(
+                    stringResource(id = R.string.detail_album_label_description),
+                    album.description
+                ),
+                ItemDetail(
+                    stringResource(id = R.string.detail_album_label_date),
+                    album.releaseDate,
+                    isDate = true
+                ),
+                ItemDetail(stringResource(id = R.string.detail_album_label_genre), album.genre),
             )
 
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
 
                 Box(
-                    modifier = Modifier
-                        .size(200.dp, 200.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
                         model = album.cover,
@@ -63,8 +72,9 @@ fun AlbumDetailPage(
                             .size(160.dp)
                     )
                 }
+                DetailedList(details = details)
             }
-            DetailedList(details = details)
+
         }
     }
 }
