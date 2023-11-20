@@ -1,19 +1,28 @@
 package com.miso2023equipo2.vinilos.pages.album
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.repository.preview.PreviewAlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
+import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
 import com.miso2023equipo2.vinilos.ui.components.EmptyItemsScreen
 import com.miso2023equipo2.vinilos.ui.components.ListItem
+import com.miso2023equipo2.vinilos.ui.components.VinylsButton
 import com.miso2023equipo2.vinilos.ui.components.VinylsList
 
 
@@ -42,15 +51,39 @@ fun AlbumCataloguePage(
                 listItem.add(listGen)
 
             }
-            VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
+            Box(modifier = Modifier.weight(0.9f)) {
+                VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
+            }
+            Box(contentAlignment=Alignment.Center,
+                modifier = Modifier.weight(0.1f)
+                .align(Alignment.CenterHorizontally)
+
+                ) {
+                VinylsButton(
+                    icon = Icons.Outlined.Add,
+                    onClick = { /*TODO*/ },
+                    type = ButtonType.PRIMARY,
+                    modifier = Modifier
+                        .width(48.dp)
+                        .height(48.dp)
+
+                )
+            }
+
         }
+        
+
     }
+
+
 }
 
 
 @Preview
 @Composable
 fun AlbumCataloguePagePreview() {
-    val albumCatalogueViewModel: AlbumCatalogueViewModel = viewModel()
+    val albumCatalogueViewModel = AlbumCatalogueViewModel(
+        albumsRepository = PreviewAlbumsRepository()
+    )
     AlbumCataloguePage(albumCatalogueViewModel.uiState) {}
 }
