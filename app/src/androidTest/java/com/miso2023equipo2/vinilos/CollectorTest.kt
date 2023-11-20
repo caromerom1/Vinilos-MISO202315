@@ -12,7 +12,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase
 import org.hamcrest.CoreMatchers
 import org.junit.After
 import org.junit.Before
@@ -24,7 +24,7 @@ private const val LAUNCH_TIMEOUT = 6000L
 
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 33)
-class AlbumTest {
+class CollectorTest {
 
     private lateinit var device: UiDevice
     private val timeout: Long = 20000
@@ -59,29 +59,15 @@ class AlbumTest {
     }
 
     @Test
-    fun checkAlbumList() {
-        pageObject.login()
+    fun checkCollectorList() {
+        pageObject.navigateToCollectors()
 
-        val album1 = device.wait(
+        val collector = device.wait(
             Until.findObject(
-                By.text("Con arena nueva")
+                By.text("Pedro Navaja")
             ), timeout
         )
-        assertEquals("Con arena nueva", album1.text)
-    }
-
-    @Test
-    fun checkAlbumDetail() {
-        pageObject.login()
-
-        val album1 = device.wait(Until.findObject(By.clickable(true)), timeout)
-        album1.click()
-        val detailTitle = device.wait(Until.findObject(By.text("Detalle Álbum")), timeout)
-        val scrollView =
-            device.wait(Until.findObject(By.clazz("android.widget.ScrollView")), timeout)
-
-        assertEquals(9, scrollView.childCount)
-        assertEquals("Detalle Álbum", detailTitle.text)
+        TestCase.assertEquals("Pedro Navaja", collector.text)
     }
 
     /**
