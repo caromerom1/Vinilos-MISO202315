@@ -10,13 +10,25 @@
 
 - Camilo Andrés Romero Maldonado – ca.romerom1@uniandes.edu.co
 
+## Before any of the steps shown below
+
+#### Clone the repository:
+
+```
+git clone https://github.com/caromerom1/Vinilos-MISO202315.git
+```
+
+#### Open Android Studio
+
+- Double click `Shift` key
+
+- Write `Sync Project with Gradle files`
+
+- Press `Enter` to run the command
+
 ## Execute App
 
 To run the app follow these steps:
-
-- Open the latest available version of Android Studio
-
-- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
 
 - Select a device that uses Android SDK 21 or higher.
 
@@ -32,10 +44,6 @@ To run the app follow these steps:
 
 To run the tests follow these steps:
 
-- Open the latest available version of Android Studio
-
-- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
-
 - Open any file containing tests
 
 - Click on the button on the right side of the line number that matches the name of the class that contains tests
@@ -43,10 +51,6 @@ To run the tests follow these steps:
 ## Build App
 
 To build the app follow these steps:
-
-- Open the latest available version of Android Studio
-
-- Open `/app/build.gradle.kts` file and ensure all the gradle dependencies of the project are installed and synced
 
 - Click on `build` menu on the top bar
 
