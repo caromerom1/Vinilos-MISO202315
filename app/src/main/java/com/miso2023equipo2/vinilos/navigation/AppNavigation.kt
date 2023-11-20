@@ -100,8 +100,8 @@ fun AppNavigation(
                 composable(route = AppPages.AlbumCataloguePage.route) {
                     val albumCatalogueViewModel: AlbumCatalogueViewModel =
                         viewModel(factory = AlbumCatalogueViewModel.Factory)
-                    viewModel.setIconMenu(Icons.Filled.Menu)
 
+                    viewModel.setIconMenu(Icons.Filled.Menu)
                     AlbumCataloguePage(
                         user=uiState.user,
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
