@@ -5,6 +5,8 @@ import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
 import com.miso2023equipo2.vinilos.data.repository.ArtistRepository
 import com.miso2023equipo2.vinilos.data.repository.ArtistRepositoryImpl
+import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
+import com.miso2023equipo2.vinilos.data.repository.CollectorRepositoryImpl
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceImpl
 import kotlinx.serialization.json.Json
@@ -14,6 +16,7 @@ import retrofit2.Retrofit
 interface AppContainer {
     val albumsRepository: AlbumsRepository
     val artistRepository: ArtistRepository
+    val collectorRepository: CollectorRepository
 }
 
 class DefaultAppContainer : AppContainer {
@@ -40,4 +43,7 @@ class DefaultAppContainer : AppContainer {
         ArtistRepositoryImpl(retrofitService)
     }
 
+    override val collectorRepository: CollectorRepository by lazy {
+        CollectorRepositoryImpl(retrofitService)
+    }
 }
