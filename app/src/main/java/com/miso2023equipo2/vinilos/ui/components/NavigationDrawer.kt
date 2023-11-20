@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.miso2023equipo2.vinilos.navigation.AppPages
+import com.miso2023equipo2.vinilos.navigation.User
 import kotlinx.coroutines.launch
 
 data class NavigationItem(val label: String, val action: () -> Unit)
@@ -28,6 +29,7 @@ data class NavigationItem(val label: String, val action: () -> Unit)
 
 @Composable
 fun NavigationDrawer(
+    userRol: User?,
     drawerState: DrawerState,
     navController: NavController,
     content: @Composable () -> Unit
@@ -35,12 +37,20 @@ fun NavigationDrawer(
 
     val scope = rememberCoroutineScope()
 
-    val menus = listOf(
+    val menus = mutableListOf(
         NavigationItem("Álbumes") { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
         NavigationItem("Artistas") { navController.navigate(route = AppPages.ArtistCataloguePage.route) },
         NavigationItem("Coleccionistas") { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
-    )
 
+        )
+
+    if (userRol != null) {
+        if (userRol.rol== User.CollectionRol.rol){
+            menus.add(
+                NavigationItem("Crear Album") { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
+                )
+        }
+    }
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = navController.currentBackStackEntry?.destination?.route != AppPages.HomePage.route,
@@ -92,7 +102,9 @@ fun NavigationDrawer(
 @Composable
 fun NavigationDrawerPreview() {
     NavigationDrawer(
+        userRol=User.CollectionRol,
         drawerState = rememberDrawerState(initialValue = DrawerValue.Open),
         rememberNavController()
+
     ) {}
 }

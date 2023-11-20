@@ -65,7 +65,7 @@ fun AppNavigation(
     val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
 
 
-    NavigationDrawer(navController = navController, drawerState = drawerState) {
+    NavigationDrawer(navController = navController, drawerState = drawerState, userRol = uiState.user) {
         Scaffold(
             topBar = {
                 VinylsAppBar(
@@ -89,9 +89,11 @@ fun AppNavigation(
                     HomePage(
                         onClickCollectorButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
+                            viewModel.logIn(User.CollectionRol)
                         },
                         onClickGuestButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
+                            viewModel.logIn(User.GuessedRol)
                         }
                     )
                 }
