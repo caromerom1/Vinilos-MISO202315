@@ -37,6 +37,7 @@ import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.pages.HomePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.album.AlbumCreatePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
@@ -63,7 +64,6 @@ fun AppNavigation(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
-
 
     NavigationDrawer(navController = navController, drawerState = drawerState, userRol = uiState.user) {
         Scaffold(
@@ -107,17 +107,9 @@ fun AppNavigation(
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
-                        }
-                    )
-                }
-                composable(route = AppPages.ArtistCataloguePage.route) {
-                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
-                        viewModel(factory = ArtistCatalogueViewModel.Factory)
-                    viewModel.setIconMenu(Icons.Filled.Menu)
-                    ArtistCataloguePage(
-                        uiState = artistCatalogueViewModel.uiState,
-                        onDetailButton = {
-                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        },
+                        onCreateAlbumButton = {
+                            navController.navigate(route = AppPages.AlbumCreatePage.route)
                         }
                     )
                 }
@@ -142,6 +134,25 @@ fun AppNavigation(
                         albumDetailUiState = albumDetailViewModel.uiState,
                     )
                 }
+                composable(
+                    route=AppPages.AlbumCreatePage.route
+                ){
+                    
+                    AlbumCreatePage()
+
+                }
+                composable(route = AppPages.ArtistCataloguePage.route) {
+                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
+                        viewModel(factory = ArtistCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    ArtistCataloguePage(
+                        uiState = artistCatalogueViewModel.uiState,
+                        onDetailButton = {
+                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        }
+                    )
+                }
+
                 composable(
                     route = "${AppPages.ArtistDetailPage.route}/{artistId}",
                     arguments = listOf(navArgument("artistId") { type = NavType.StringType })
@@ -219,6 +230,7 @@ fun VinylsAppBar(
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
             equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
             equals(AppPages.CollectorCataloguePage.route) -> stringResource(id = R.string.collector_title)
+            equals(AppPages.AlbumCreatePage.route)-> stringResource(id = R.string.create_album_title)
             startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             startsWith(AppPages.CollectorDetailPage.route) -> stringResource(id = R.string.detail_collector_title)

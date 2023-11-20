@@ -31,7 +31,8 @@ import com.miso2023equipo2.vinilos.ui.components.VinylsList
 fun AlbumCataloguePage(
     user: User?,
     albumCatalogueUiState: DataUiState<List<Album>>,
-    onDetailAlbumButton: (id: String) -> Unit
+    onDetailAlbumButton: (id: String) -> Unit = {},
+    onCreateAlbumButton: ()->Unit = {}
 ) {
     Column(modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -65,7 +66,7 @@ fun AlbumCataloguePage(
                     ) {
                         VinylsButton(
                             icon = Icons.Outlined.Add,
-                            onClick = { /*TODO*/ },
+                            onClick = onCreateAlbumButton,
                             type = ButtonType.PRIMARY,
                             modifier = Modifier
                                 .width(48.dp)
@@ -92,5 +93,5 @@ fun AlbumCataloguePagePreview() {
     val albumCatalogueViewModel = AlbumCatalogueViewModel(
         albumsRepository = PreviewAlbumsRepository()
     )
-    AlbumCataloguePage(albumCatalogueUiState=albumCatalogueViewModel.uiState,user=User.GuessedRol) {}
+    AlbumCataloguePage(albumCatalogueUiState=albumCatalogueViewModel.uiState,user=User.GuessedRol )
 }

@@ -47,7 +47,7 @@ fun NavigationDrawer(
     if (userRol != null) {
         if (userRol.rol== User.CollectionRol.rol){
             menus.add(
-                NavigationItem("Crear Album") { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
+                NavigationItem("Crear Album") { navController.navigate(route = AppPages.AlbumCreatePage.route) },
                 )
         }
     }
