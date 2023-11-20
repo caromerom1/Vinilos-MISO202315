@@ -33,7 +33,7 @@ import com.miso2023equipo2.vinilos.ui.theme.Purple100
 
 @Composable
 fun ArtistDetailPage(
-    artisDetailUiState: DataUiState<Artist>
+    artistDetailUiState: DataUiState<Artist>
 ) {
     Column(
         modifier = Modifier
@@ -41,12 +41,12 @@ fun ArtistDetailPage(
             .padding(horizontal = 8.dp)
     ) {
         DataFetchStates(
-            uiState = artisDetailUiState,
+            uiState = artistDetailUiState,
             errorMessage = R.string.loading_failed_artist
         ) {
-            if (artisDetailUiState !is DataUiState.Success) return@DataFetchStates
+            if (artistDetailUiState !is DataUiState.Success) return@DataFetchStates
 
-            val artist = artisDetailUiState.data
+            val artist = artistDetailUiState.data
 
             val details = listOf(
                 ItemDetail(stringResource(id = R.string.detail_album_label_name), artist.name),

@@ -6,4 +6,6 @@ sealed class AppPages(val route: String) {
     object AlbumDetailPage : AppPages(route = "albumDetail")
     object ArtistCataloguePage : AppPages(route = "artistCatalogue")
     object ArtistDetailPage : AppPages(route = "artistDetail")
+    object CollectorCataloguePage : AppPages(route = "collectorCatalogue")
+    object CollectorDetailPage : AppPages(route = "collectorDetail")
 }

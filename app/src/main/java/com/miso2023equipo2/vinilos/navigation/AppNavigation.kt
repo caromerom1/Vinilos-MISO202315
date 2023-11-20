@@ -43,6 +43,10 @@ import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailPage
 import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailViewModel
+import com.miso2023equipo2.vinilos.pages.collector.CollectorCataloguePage
+import com.miso2023equipo2.vinilos.pages.collector.CollectorCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.collector.CollectorDetailPage
+import com.miso2023equipo2.vinilos.pages.collector.CollectorDetailViewModel
 import com.miso2023equipo2.vinilos.ui.components.NavigationDrawer
 import kotlinx.coroutines.launch
 
@@ -153,7 +157,39 @@ fun AppNavigation(
                     artistDetailViewModel.getArtist(artistId)
 
                     ArtistDetailPage(
-                        artisDetailUiState = artistDetailViewModel.uiState,
+                        artistDetailUiState = artistDetailViewModel.uiState,
+                    )
+                }
+                composable(route = AppPages.CollectorCataloguePage.route) {
+                    val collectorCatalogueViewModel: CollectorCatalogueViewModel =
+                        viewModel(factory = CollectorCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    CollectorCataloguePage(
+                        uiState = collectorCatalogueViewModel.uiState,
+                        onDetailButton = {
+                            navController.navigate(route = "${AppPages.CollectorDetailPage.route}/$it")
+                        }
+                    )
+                }
+                composable(
+                    route = "${AppPages.CollectorDetailPage.route}/{collectorId}",
+                    arguments = listOf(navArgument("collectorId") { type = NavType.StringType })
+                ) {
+                    val collectorId = it.arguments?.getString("collectorId")
+                    if (collectorId == null) {
+                        navController.popBackStack()
+                        return@composable
+                    }
+
+                    viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
+                    val collectorDetailViewModel: CollectorDetailViewModel =
+                        viewModel(factory = CollectorDetailViewModel.Factory)
+
+                    collectorDetailViewModel.getCollector(collectorId)
+
+                    CollectorDetailPage(
+                        uiState = collectorDetailViewModel.uiState,
                     )
                 }
             }
@@ -179,8 +215,10 @@ fun VinylsAppBar(
             equals(AppPages.HomePage.route) -> stringResource(id = R.string.home_title)
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
             equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
+            equals(AppPages.CollectorCataloguePage.route) -> stringResource(id = R.string.collector_title)
             startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
+            startsWith(AppPages.CollectorDetailPage.route) -> stringResource(id = R.string.detail_collector_title)
             else -> stringResource(id = R.string.home_title)
         }
     }
