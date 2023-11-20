@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +33,7 @@ import com.miso2023equipo2.vinilos.ui.theme.Purple500
 
 enum class ButtonType {
     PRIMARY, SECONDARY, TERTIARY, ALTERNATIVE,
+
 }
 
 @Composable
@@ -74,13 +76,13 @@ fun VinylsButton(
         contentPadding = padding,
         onClick = onClick, colors = ButtonDefaults.buttonColors(
             containerColor = when (type) {
-                ButtonType.PRIMARY -> Purple400
-                ButtonType.ALTERNATIVE -> Purple300
+                ButtonType.PRIMARY -> MaterialTheme.colorScheme.primary
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.secondary
                 else -> Color.Transparent
             }, contentColor = when (type) {
                 ButtonType.PRIMARY -> White
-                ButtonType.ALTERNATIVE -> Purple500
-                else -> Purple500
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.secondary
+                else -> MaterialTheme.colorScheme.secondary
             }
         ),
         shape = shape,
