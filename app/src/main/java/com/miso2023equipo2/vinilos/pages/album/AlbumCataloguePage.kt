@@ -17,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.repository.preview.PreviewAlbumsRepository
+import com.miso2023equipo2.vinilos.navigation.User
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
@@ -28,6 +29,7 @@ import com.miso2023equipo2.vinilos.ui.components.VinylsList
 
 @Composable
 fun AlbumCataloguePage(
+    user: User?,
     albumCatalogueUiState: DataUiState<List<Album>>,
     onDetailAlbumButton: (id: String) -> Unit
 ) {
@@ -54,21 +56,26 @@ fun AlbumCataloguePage(
             Box(modifier = Modifier.weight(0.9f)) {
                 VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
             }
-            Box(contentAlignment=Alignment.Center,
-                modifier = Modifier.weight(0.1f)
-                .align(Alignment.CenterHorizontally)
+            if(user!=null){
+                if(user.rol==User.CollectionRol.rol){
+                    Box(contentAlignment=Alignment.Center,
+                        modifier = Modifier.weight(0.1f)
+                            .align(Alignment.CenterHorizontally)
 
-                ) {
-                VinylsButton(
-                    icon = Icons.Outlined.Add,
-                    onClick = { /*TODO*/ },
-                    type = ButtonType.PRIMARY,
-                    modifier = Modifier
-                        .width(48.dp)
-                        .height(48.dp)
+                    ) {
+                        VinylsButton(
+                            icon = Icons.Outlined.Add,
+                            onClick = { /*TODO*/ },
+                            type = ButtonType.PRIMARY,
+                            modifier = Modifier
+                                .width(48.dp)
+                                .height(48.dp)
 
-                )
+                        )
+                    }
+                }
             }
+
 
         }
         
@@ -85,5 +92,5 @@ fun AlbumCataloguePagePreview() {
     val albumCatalogueViewModel = AlbumCatalogueViewModel(
         albumsRepository = PreviewAlbumsRepository()
     )
-    AlbumCataloguePage(albumCatalogueViewModel.uiState) {}
+    AlbumCataloguePage(albumCatalogueUiState=albumCatalogueViewModel.uiState,user=User.GuessedRol) {}
 }

@@ -103,6 +103,7 @@ fun AppNavigation(
                     viewModel.setIconMenu(Icons.Filled.Menu)
 
                     AlbumCataloguePage(
+                        user=uiState.user,
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
