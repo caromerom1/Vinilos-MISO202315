@@ -13,7 +13,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.miso2023equipo2.vinilos.VinylosApplication
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
-import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -33,10 +32,8 @@ class AlbumDetailViewModel(
                     album
                 )
             } catch (e: IOException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
                 DataUiState.Error
             } catch (e: HttpException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
                 DataUiState.Error
             }
         }

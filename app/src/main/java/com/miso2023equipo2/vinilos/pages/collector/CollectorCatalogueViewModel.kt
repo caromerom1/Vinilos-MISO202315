@@ -10,12 +10,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.miso2023equipo2.vinilos.MainActivity
 import com.miso2023equipo2.vinilos.VinylosApplication
-import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.Collector
-import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
-import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
 import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import kotlinx.coroutines.launch
@@ -40,19 +36,16 @@ class CollectorCatalogueViewModel(
                     listResult
                 )
             } catch (e: IOException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
+
                 DataUiState.Error
             } catch (e: HttpException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
+
                 DataUiState.Error
             }
         }
     }
 
-    /**
-     * Se crea un factory con el repositorio como dependencia
-     *
-     */
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

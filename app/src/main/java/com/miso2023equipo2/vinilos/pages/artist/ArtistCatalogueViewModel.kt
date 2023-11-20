@@ -34,10 +34,10 @@ class ArtistCatalogueViewModel(
                     listResult
                 )
             } catch (e: IOException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
+
                 DataUiState.Error
             } catch (e: HttpException) {
-                Log.d("ERROR_TAG", "Mensaje de error", e)
+
                 DataUiState.Error
             }
         }
