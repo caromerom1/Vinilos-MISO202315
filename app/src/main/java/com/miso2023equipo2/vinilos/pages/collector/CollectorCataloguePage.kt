@@ -35,7 +35,7 @@ fun CollectorCataloguePage(
             val listItem: MutableList<ListItem> = mutableListOf()
             uiState.data.forEach { collector ->
                 val listGen =
-                    ListItem(text = collector.name, imageUrl = collector.cover, id = "${collector.id}")
+                    ListItem(text = collector.name, imageUrl = collector.name, id = "${collector.id}")
                 listItem.add(listGen)
 
             }
