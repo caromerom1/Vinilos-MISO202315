@@ -12,11 +12,9 @@ import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.data.model.Album
-import com.miso2023equipo2.vinilos.data.repository.preview.PreviewAlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.User
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
@@ -96,17 +94,4 @@ fun AlbumCataloguePage(
     }
 
 
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun AlbumCataloguePagePreview() {
-    val albumCatalogueViewModel = AlbumCatalogueViewModel(
-        albumsRepository = PreviewAlbumsRepository()
-    )
-    AlbumCataloguePage(
-        albumCatalogueUiState = albumCatalogueViewModel.uiState,
-        user = User.Collector
-    )
 }

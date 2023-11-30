@@ -28,7 +28,7 @@ fun EmptyItemsScreen(@StringRes message: Int, modifier: Modifier = Modifier) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_empty_box),
-            contentDescription = "not found",
+            contentDescription = "Not found",
             modifier = Modifier.size(200.dp),
             colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary)
         )

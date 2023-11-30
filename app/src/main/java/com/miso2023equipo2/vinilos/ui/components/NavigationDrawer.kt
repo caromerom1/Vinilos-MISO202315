@@ -1,5 +1,7 @@
 package com.miso2023equipo2.vinilos.ui.components
 
+import androidx.annotation.StringRes
+import com.miso2023equipo2.vinilos.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,8 +27,7 @@ import com.miso2023equipo2.vinilos.navigation.AppPages
 import com.miso2023equipo2.vinilos.navigation.User
 import kotlinx.coroutines.launch
 
-data class NavigationItem(val label: String, val action: () -> Unit)
-
+data class NavigationItem(@StringRes val label: Int, val action: () -> Unit)
 
 @Composable
 fun NavigationDrawer(
@@ -37,11 +39,11 @@ fun NavigationDrawer(
     val scope = rememberCoroutineScope()
 
     val menus = mutableListOf(
-        NavigationItem("Álbumes") { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
-        NavigationItem("Artistas") { navController.navigate(route = AppPages.ArtistCataloguePage.route) },
-        NavigationItem("Coleccionistas") { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
+        NavigationItem(R.string.catalogue_album_title) { navController.navigate(route = AppPages.AlbumCataloguePage.route) },
+        NavigationItem(R.string.artist_title) { navController.navigate(route = AppPages.ArtistCataloguePage.route) },
+        NavigationItem(R.string.collector_title) { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
+    )
 
-        )
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = navController.currentBackStackEntry?.destination?.route != AppPages.HomePage.route,
@@ -50,7 +52,7 @@ fun NavigationDrawer(
                 Column {
                     menus.forEach {
                         NavigationDrawerItem(
-                            label = { Text(text = it.label) },
+                            label = { Text(text = stringResource(id = it.label)) },
                             selected = false,
                             onClick = {
                                 it.action()
@@ -76,7 +78,7 @@ fun NavigationDrawer(
                             }
                         },
                         type = ButtonType.TERTIARY,
-                        label = "Salir",
+                        label = stringResource(id = R.string.exit),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 64.dp, vertical = 0.dp)
