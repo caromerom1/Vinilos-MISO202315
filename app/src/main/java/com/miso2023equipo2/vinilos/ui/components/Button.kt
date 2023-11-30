@@ -27,9 +27,6 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.miso2023equipo2.vinilos.ui.theme.Purple300
-import com.miso2023equipo2.vinilos.ui.theme.Purple400
-import com.miso2023equipo2.vinilos.ui.theme.Purple500
 
 enum class ButtonType {
     PRIMARY, SECONDARY, TERTIARY, ALTERNATIVE,
@@ -100,7 +97,7 @@ fun ButtonContent(icon: ImageVector?, label: String?, type: ButtonType) {
     if (icon != null) {
         val color = when (type) {
             ButtonType.PRIMARY -> White
-            else -> Purple400
+            else -> MaterialTheme.colorScheme.primary
         }
 
         Icon(
