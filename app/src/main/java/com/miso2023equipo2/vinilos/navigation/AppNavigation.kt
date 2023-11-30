@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -245,11 +246,11 @@ fun VinylsAppBar(
     if (icon == Icons.Filled.ArrowBack) {
         TopAppBar(
             title = {
-                Text(text = currentScreen)
+                Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
-                titleContentColor = Color.Black,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
             ),
             navigationIcon = {
                 IconButton(onClick = {
@@ -269,7 +270,7 @@ fun VinylsAppBar(
     if (icon == null) {
         CenterAlignedTopAppBar(
             title = {
-                Text(text = currentScreen)
+                Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -282,7 +283,7 @@ fun VinylsAppBar(
 
     CenterAlignedTopAppBar(
         title = {
-            Text(text = currentScreen)
+            Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -321,4 +322,22 @@ fun NavigationIcon(
             contentDescription = iconDescription?.let { stringResource(id = it) }
         )
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(
+    showBackground = true,
+
+    )
+@Composable
+fun TestBarPreview() {
+    TopAppBar(
+        title = {
+            Text(text = "Texto", color = Color.Green)
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.onPrimary,
+        ),
+    )
 }

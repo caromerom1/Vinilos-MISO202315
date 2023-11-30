@@ -18,13 +18,15 @@ import androidx.core.view.WindowCompat
 private val DarkColorScheme = darkColorScheme(
     primary = Purple400,
     secondary = Purple300,
-    tertiary = Purple500
+    tertiary = Purple500,
+    onPrimary = White
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple400,
     secondary = Purple300,
-    tertiary = Purple500
+    tertiary = Purple500,
+    onPrimary = TextBlack
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -41,15 +43,9 @@ private val LightColorScheme = lightColorScheme(
 fun VinilosTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }

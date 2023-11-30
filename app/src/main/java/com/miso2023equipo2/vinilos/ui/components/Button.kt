@@ -77,12 +77,12 @@ fun VinylsButton(
         onClick = onClick, colors = ButtonDefaults.buttonColors(
             containerColor = when (type) {
                 ButtonType.PRIMARY -> MaterialTheme.colorScheme.primary
-                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.secondary
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primary
                 else -> Color.Transparent
             }, contentColor = when (type) {
                 ButtonType.PRIMARY -> White
-                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.secondary
-                else -> MaterialTheme.colorScheme.secondary
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primary
+                else -> MaterialTheme.colorScheme.primary
             }
         ),
         shape = shape,
