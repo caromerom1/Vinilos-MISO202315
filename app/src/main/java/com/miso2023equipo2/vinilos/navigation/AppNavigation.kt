@@ -323,21 +323,3 @@ fun NavigationIcon(
         )
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(
-    showBackground = true,
-
-    )
-@Composable
-fun TestBarPreview() {
-    TopAppBar(
-        title = {
-            Text(text = "Texto", color = Color.Green)
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-        ),
-    )
-}
