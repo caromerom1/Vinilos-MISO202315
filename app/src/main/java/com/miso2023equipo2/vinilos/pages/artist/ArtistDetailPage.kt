@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +29,6 @@ import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
 import com.miso2023equipo2.vinilos.ui.components.DetailedList
 import com.miso2023equipo2.vinilos.ui.components.ItemDetail
-import com.miso2023equipo2.vinilos.ui.theme.Purple100
 
 @Composable
 fun ArtistDetailPage(
@@ -92,7 +92,7 @@ fun ArtistDetailPage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp)
-                        .background(color = Purple100),
+                        .background(color = MaterialTheme.colorScheme.outline),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {

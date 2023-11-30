@@ -9,5 +9,6 @@ val Purple400 = Color(0xFF6750A4)
 val Purple500 = Color(0xFF21005D)
 
 val TextBlack = Color(0xFF49454F)
-val Gray = Color(0xFF79747E)
+
+// val Gray = Color(0xFF79747E)
 val White = Color(0xFFFFFFFF)

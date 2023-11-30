@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.miso2023equipo2.vinilos.navigation.AppNavigation
-import com.miso2023equipo2.vinilos.ui.theme.VinilosTheme
+import com.miso2023equipo2.vinilos.ui.theme.VinylsTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            VinilosTheme {
+            VinylsTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    VinilosTheme {
+    VinylsTheme {
         AppNavigation()
     }
 }

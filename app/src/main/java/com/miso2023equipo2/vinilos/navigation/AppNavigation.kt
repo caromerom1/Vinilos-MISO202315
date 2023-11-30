@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -37,6 +38,7 @@ import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.pages.HomePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
+import com.miso2023equipo2.vinilos.pages.album.AlbumCreatePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
@@ -64,8 +66,10 @@ fun AppNavigation(
 
     val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
 
-
-    NavigationDrawer(navController = navController, drawerState = drawerState) {
+    NavigationDrawer(
+        navController = navController,
+        drawerState = drawerState,
+    ) {
         Scaffold(
             topBar = {
                 VinylsAppBar(
@@ -89,32 +93,27 @@ fun AppNavigation(
                     HomePage(
                         onClickCollectorButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
+                            viewModel.logIn(User.Collector)
                         },
                         onClickGuestButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
+                            viewModel.logIn(User.Guest)
                         }
                     )
                 }
                 composable(route = AppPages.AlbumCataloguePage.route) {
                     val albumCatalogueViewModel: AlbumCatalogueViewModel =
                         viewModel(factory = AlbumCatalogueViewModel.Factory)
-                    viewModel.setIconMenu(Icons.Filled.Menu)
 
+                    viewModel.setIconMenu(Icons.Filled.Menu)
                     AlbumCataloguePage(
+                        user = uiState.user,
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
-                        }
-                    )
-                }
-                composable(route = AppPages.ArtistCataloguePage.route) {
-                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
-                        viewModel(factory = ArtistCatalogueViewModel.Factory)
-                    viewModel.setIconMenu(Icons.Filled.Menu)
-                    ArtistCataloguePage(
-                        uiState = artistCatalogueViewModel.uiState,
-                        onDetailButton = {
-                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        },
+                        onCreateAlbumButton = {
+                            navController.navigate(route = AppPages.AlbumCreatePage.route)
                         }
                     )
                 }
@@ -139,6 +138,26 @@ fun AppNavigation(
                         albumDetailUiState = albumDetailViewModel.uiState,
                     )
                 }
+                composable(
+                    route = AppPages.AlbumCreatePage.route
+                ) {
+                    viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
+                    AlbumCreatePage()
+
+                }
+                composable(route = AppPages.ArtistCataloguePage.route) {
+                    val artistCatalogueViewModel: ArtistCatalogueViewModel =
+                        viewModel(factory = ArtistCatalogueViewModel.Factory)
+                    viewModel.setIconMenu(Icons.Filled.Menu)
+                    ArtistCataloguePage(
+                        uiState = artistCatalogueViewModel.uiState,
+                        onDetailButton = {
+                            navController.navigate(route = "${AppPages.ArtistDetailPage.route}/$it")
+                        }
+                    )
+                }
+
                 composable(
                     route = "${AppPages.ArtistDetailPage.route}/{artistId}",
                     arguments = listOf(navArgument("artistId") { type = NavType.StringType })
@@ -216,6 +235,7 @@ fun VinylsAppBar(
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
             equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
             equals(AppPages.CollectorCataloguePage.route) -> stringResource(id = R.string.collector_title)
+            equals(AppPages.AlbumCreatePage.route) -> stringResource(id = R.string.create_album_title)
             startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             startsWith(AppPages.CollectorDetailPage.route) -> stringResource(id = R.string.detail_collector_title)
@@ -226,11 +246,11 @@ fun VinylsAppBar(
     if (icon == Icons.Filled.ArrowBack) {
         TopAppBar(
             title = {
-                Text(text = currentScreen)
+                Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
-                titleContentColor = Color.Black,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
             ),
             navigationIcon = {
                 IconButton(onClick = {
@@ -250,7 +270,7 @@ fun VinylsAppBar(
     if (icon == null) {
         CenterAlignedTopAppBar(
             title = {
-                Text(text = currentScreen)
+                Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -263,7 +283,7 @@ fun VinylsAppBar(
 
     CenterAlignedTopAppBar(
         title = {
-            Text(text = currentScreen)
+            Text(text = currentScreen, color = MaterialTheme.colorScheme.onPrimary)
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,

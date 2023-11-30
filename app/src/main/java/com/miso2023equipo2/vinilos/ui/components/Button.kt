@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,12 +27,10 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.miso2023equipo2.vinilos.ui.theme.Purple300
-import com.miso2023equipo2.vinilos.ui.theme.Purple400
-import com.miso2023equipo2.vinilos.ui.theme.Purple500
 
 enum class ButtonType {
     PRIMARY, SECONDARY, TERTIARY, ALTERNATIVE,
+
 }
 
 @Composable
@@ -74,13 +73,13 @@ fun VinylsButton(
         contentPadding = padding,
         onClick = onClick, colors = ButtonDefaults.buttonColors(
             containerColor = when (type) {
-                ButtonType.PRIMARY -> Purple400
-                ButtonType.ALTERNATIVE -> Purple300
+                ButtonType.PRIMARY -> MaterialTheme.colorScheme.primary
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primary
                 else -> Color.Transparent
             }, contentColor = when (type) {
                 ButtonType.PRIMARY -> White
-                ButtonType.ALTERNATIVE -> Purple500
-                else -> Purple500
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primary
+                else -> MaterialTheme.colorScheme.primary
             }
         ),
         shape = shape,
@@ -98,7 +97,7 @@ fun ButtonContent(icon: ImageVector?, label: String?, type: ButtonType) {
     if (icon != null) {
         val color = when (type) {
             ButtonType.PRIMARY -> White
-            else -> Purple400
+            else -> MaterialTheme.colorScheme.primary
         }
 
         Icon(
@@ -165,6 +164,8 @@ fun VinylsButtonPreview() {
                     .height(48.dp)
             )
             Spacer(Modifier.height(5.dp))
+
+
         }
     }
 }

@@ -6,6 +6,7 @@
     <string name="collector_title">Coleccionistas</string>
     <string name="detail_artist_title">Detalle Artista</string>
     <string name="detail_album_title">Detalle Álbum</string>
+    <string name="create_album_title">Crear Álbum</string>
     <string name="detail_collector_title">Detalle Coleccionista</string>
     <string name="loading_failed_albums">Álbumes no encontrados</string>
     <string name="loading_failed_album">Álbum no encontrado</string>
@@ -23,4 +24,5 @@
     <string name="albums_not_found">No se encontraron álbumes</string>
     <string name="artists_not_found">No se encontraron artistas</string>
     <string name="collectors_not_found">No se encontraron coleccionistas</string>
+    <string name="exit">Salir</string>
 </resources>
