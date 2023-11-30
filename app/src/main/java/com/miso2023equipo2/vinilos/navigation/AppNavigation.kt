@@ -65,7 +65,10 @@ fun AppNavigation(
 
     val route: String = backStackEntry?.destination?.route ?: AppPages.HomePage.route
 
-    NavigationDrawer(navController = navController, drawerState = drawerState, userRol = uiState.user) {
+    NavigationDrawer(
+        navController = navController,
+        drawerState = drawerState,
+    ) {
         Scaffold(
             topBar = {
                 VinylsAppBar(
@@ -89,11 +92,11 @@ fun AppNavigation(
                     HomePage(
                         onClickCollectorButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
-                            viewModel.logIn(User.CollectionRol)
+                            viewModel.logIn(User.Collector)
                         },
                         onClickGuestButton = {
                             navController.navigate(route = AppPages.AlbumCataloguePage.route)
-                            viewModel.logIn(User.GuessedRol)
+                            viewModel.logIn(User.Guest)
                         }
                     )
                 }
@@ -103,7 +106,7 @@ fun AppNavigation(
 
                     viewModel.setIconMenu(Icons.Filled.Menu)
                     AlbumCataloguePage(
-                        user=uiState.user,
+                        user = uiState.user,
                         albumCatalogueUiState = albumCatalogueViewModel.uiState,
                         onDetailAlbumButton = {
                             navController.navigate(route = "${AppPages.AlbumDetailPage.route}/$it")
@@ -135,9 +138,10 @@ fun AppNavigation(
                     )
                 }
                 composable(
-                    route=AppPages.AlbumCreatePage.route
-                ){
-                    
+                    route = AppPages.AlbumCreatePage.route
+                ) {
+                    viewModel.setIconMenu(Icons.Filled.ArrowBack)
+
                     AlbumCreatePage()
 
                 }
@@ -230,7 +234,7 @@ fun VinylsAppBar(
             equals(AppPages.AlbumCataloguePage.route) -> stringResource(id = R.string.catalogue_album_title)
             equals(AppPages.ArtistCataloguePage.route) -> stringResource(id = R.string.artist_title)
             equals(AppPages.CollectorCataloguePage.route) -> stringResource(id = R.string.collector_title)
-            equals(AppPages.AlbumCreatePage.route)-> stringResource(id = R.string.create_album_title)
+            equals(AppPages.AlbumCreatePage.route) -> stringResource(id = R.string.create_album_title)
             startsWith(AppPages.ArtistDetailPage.route) -> stringResource(id = R.string.detail_artist_title)
             startsWith(AppPages.AlbumDetailPage.route) -> stringResource(id = R.string.detail_album_title)
             startsWith(AppPages.CollectorDetailPage.route) -> stringResource(id = R.string.detail_collector_title)

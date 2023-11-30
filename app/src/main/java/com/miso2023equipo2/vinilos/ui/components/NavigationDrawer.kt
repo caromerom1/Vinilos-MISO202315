@@ -29,7 +29,6 @@ data class NavigationItem(val label: String, val action: () -> Unit)
 
 @Composable
 fun NavigationDrawer(
-    userRol: User?,
     drawerState: DrawerState,
     navController: NavController,
     content: @Composable () -> Unit
@@ -43,14 +42,6 @@ fun NavigationDrawer(
         NavigationItem("Coleccionistas") { navController.navigate(route = AppPages.CollectorCataloguePage.route) },
 
         )
-
-    if (userRol != null) {
-        if (userRol.rol== User.CollectionRol.rol){
-            menus.add(
-                NavigationItem("Crear Album") { navController.navigate(route = AppPages.AlbumCreatePage.route) },
-                )
-        }
-    }
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = navController.currentBackStackEntry?.destination?.route != AppPages.HomePage.route,
@@ -102,9 +93,7 @@ fun NavigationDrawer(
 @Composable
 fun NavigationDrawerPreview() {
     NavigationDrawer(
-        userRol=User.CollectionRol,
         drawerState = rememberDrawerState(initialValue = DrawerValue.Open),
         rememberNavController()
-
     ) {}
 }

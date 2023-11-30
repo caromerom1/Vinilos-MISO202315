@@ -8,5 +8,5 @@ data class NavigationUiState(
     val logged: Boolean = false,
     val icon: ImageVector? = null,
     @StringRes val iconDescription: Int? = null,
-    val user:User?=null,
+    val user: User? = null,
 )
