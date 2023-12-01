@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.pages.collector
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +9,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.miso2023equipo2.vinilos.VinylosApplication
+import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.data.model.Collector
+import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import kotlinx.coroutines.launch
@@ -19,17 +21,26 @@ import java.io.IOException
 
 
 class CollectorDetailViewModel(
-    private val collectorsRepository: CollectorRepository
+    private val collectorsRepository: CollectorRepository,
+    private val albumsRepository: AlbumsRepository,
 ) : ViewModel() {
-    var uiState: DataUiState<Collector> by mutableStateOf(DataUiState.Loading)
+    var uiState: DataUiState<Pair<Collector, List<Album>>> by mutableStateOf(DataUiState.Loading)
 
 
     fun getCollector(id: String) {
         viewModelScope.launch {
             uiState = try {
                 val collector = collectorsRepository.getCollector(id)
+                val collectorAlbums = collector.collectorAlbums.map { it.id }
+                val albums = mutableListOf<Album>()
+
+                collectorAlbums.forEach {
+                    val album = albumsRepository.getAlbum(it.toString())
+                    albums += album
+                }
+                val data = Pair(collector, albums)
                 DataUiState.Success(
-                    collector
+                    data
                 )
             } catch (e: IOException) {
 
@@ -47,7 +58,11 @@ class CollectorDetailViewModel(
                 val application =
                     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
                 val collectorsRepository = application.container.collectorRepository
-                CollectorDetailViewModel(collectorsRepository = collectorsRepository)
+                val albumsRepository = application.container.albumsRepository
+                CollectorDetailViewModel(
+                    collectorsRepository = collectorsRepository,
+                    albumsRepository = albumsRepository
+                )
             }
         }
     }

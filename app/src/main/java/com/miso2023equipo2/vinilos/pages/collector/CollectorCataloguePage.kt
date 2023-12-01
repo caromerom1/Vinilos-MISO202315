@@ -23,7 +23,7 @@ fun CollectorCataloguePage(
         Spacer(modifier = Modifier.height(16.dp))
         DataFetchStates(
             uiState = uiState,
-            errorMessage = R.string.loading_failed_albums
+            errorMessage = R.string.loading_failed_collectors
         ) {
             if (uiState !is DataUiState.Success) return@DataFetchStates
 
