@@ -78,13 +78,13 @@ fun AlbumCreatePage(
 
             VinylsButton(
                 label = "Guardar",
-                onClick = { navController.popBackStack()},
+                onClick = { navController.popBackStack() },
                 type = ButtonType.PRIMARY,
             )
 
             VinylsButton(
                 label = "Cancelar",
-                onClick = { navController.popBackStack()},
+                onClick = { navController.popBackStack() },
                 type = ButtonType.SECONDARY,
             )
         }
@@ -156,16 +156,22 @@ fun FormLayout(
             readOnly = true,
         )
 
-        ExposedDropdownMenuBox(expanded = expanded.value, onExpandedChange ={expanded.value = !expanded.value}) {
-            OutlinedTextField(value = genre.value, onValueChange = {},
+        ExposedDropdownMenuBox(
+            expanded = expanded.value,
+            onExpandedChange = { expanded.value = !expanded.value }) {
+            OutlinedTextField(
+                value = genre.value, onValueChange = {},
                 readOnly = true,
                 placeholder = { Text("Género") },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded.value) },
                 shape = MaterialTheme.shapes.large,
-                modifier = Modifier.menuAnchor()
+                modifier = Modifier
+                    .menuAnchor()
                     .fillMaxWidth()
-                    )
-            ExposedDropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
+            )
+            ExposedDropdownMenu(
+                expanded = expanded.value,
+                onDismissRequest = { expanded.value = false }) {
                 genreOptions.forEach { genreOption ->
                     DropdownMenuItem(
                         onClick = {

@@ -1,7 +1,6 @@
 package com.miso2023equipo2.vinilos.ui.components
 
 import androidx.annotation.StringRes
-import com.miso2023equipo2.vinilos.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.navigation.AppPages
-import com.miso2023equipo2.vinilos.navigation.User
 import kotlinx.coroutines.launch
 
 data class NavigationItem(@StringRes val label: Int, val action: () -> Unit)
