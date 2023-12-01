@@ -54,7 +54,8 @@ fun DateSelector(
 }
 
 private fun convertMillisToDate(millis: Long): String {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
+    
     return Instant.ofEpochMilli(millis)
         .atZone(ZoneId.systemDefault())
         .toLocalDate()

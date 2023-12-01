@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -39,6 +38,7 @@ import com.miso2023equipo2.vinilos.pages.HomePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCataloguePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumCreatePage
+import com.miso2023equipo2.vinilos.pages.album.AlbumCreateViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
@@ -143,7 +143,13 @@ fun AppNavigation(
                 ) {
                     viewModel.setIconMenu(Icons.Filled.ArrowBack)
 
-                    AlbumCreatePage(navController = navController)
+                    val albumCreateViewModel: AlbumCreateViewModel =
+                        viewModel(factory = AlbumCreateViewModel.Factory)
+
+                    AlbumCreatePage(
+                        navController = navController,
+                        albumCreateViewModel = albumCreateViewModel
+                    )
 
                 }
                 composable(route = AppPages.ArtistCataloguePage.route) {

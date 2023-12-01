@@ -1,5 +1,6 @@
 package com.miso2023equipo2.vinilos.pages.album
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,22 +33,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.miso2023equipo2.vinilos.R
+import com.miso2023equipo2.vinilos.data.model.AlbumCreate
+import com.miso2023equipo2.vinilos.navigation.AppPages
+import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.DateSelector
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
 
+data class AlbumCreatePageState(
+    val name: MutableState<String>,
+    val description: MutableState<String>,
+    val date: MutableState<String>,
+    val genre: MutableState<String>,
+)
+
 @Composable
 fun AlbumCreatePage(
-
+    albumCreateViewModel: AlbumCreateViewModel,
     navController: NavController
-
 ) {
     val mediumPadding = dimensionResource(id = R.dimen.padding_medium)
+
+    val formState = AlbumCreatePageState(
+        name = remember { mutableStateOf("") },
+        description = remember { mutableStateOf("") },
+        date = remember { mutableStateOf("") },
+        genre = remember { mutableStateOf("") },
+    )
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -66,6 +82,7 @@ fun AlbumCreatePage(
 
 
         FormLayout(
+            formState = formState,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -80,7 +97,24 @@ fun AlbumCreatePage(
 
             VinylsButton(
                 label = "Guardar",
-                onClick = { navController.popBackStack() },
+                onClick = {
+                    Toast.makeText(
+                        navController.context,
+                        "Creando álbum...",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    albumCreateViewModel.createAlbum(
+                        AlbumCreate(
+                            name = formState.name.value,
+                            description = formState.description.value,
+                            releaseDate = formState.date.value,
+                            genre = formState.genre.value,
+                            cover = "test-cover",
+                            recordLabel = "Sony Music"
+                        ),
+                        navController
+                    )
+                },
                 type = ButtonType.PRIMARY,
             )
 
@@ -91,6 +125,14 @@ fun AlbumCreatePage(
                 onClick = { navController.popBackStack() },
                 type = ButtonType.SECONDARY,
             )
+
+            when (albumCreateViewModel.uiState) {
+                is DataUiState.Success -> {
+                    navController.navigate(route = AppPages.AlbumCataloguePage.route)
+                }
+
+                else -> {}
+            }
         }
     }
 }
@@ -98,7 +140,8 @@ fun AlbumCreatePage(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormLayout(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    formState: AlbumCreatePageState
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
     val isSelectingDate = remember { mutableStateOf(false) }
@@ -106,10 +149,8 @@ fun FormLayout(
 
     val genreOptions = listOf("Classical", "Salsa", "Rock", "Folk")
 
-    val name = remember { mutableStateOf("") }
-    val description = remember { mutableStateOf("") }
-    val date = remember { mutableStateOf("") }
-    val genre = remember { mutableStateOf("") }
+    val (name, description, date, genre) = formState
+
     Column(
         verticalArrangement = Arrangement.spacedBy(mediumPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -209,10 +250,4 @@ fun FormLayout(
             })
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AlbumCreatePagePreview() {
-    AlbumCreatePage(navController = rememberNavController())
 }
