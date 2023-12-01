@@ -143,7 +143,7 @@ fun AppNavigation(
                 ) {
                     viewModel.setIconMenu(Icons.Filled.ArrowBack)
 
-                    AlbumCreatePage()
+                    AlbumCreatePage(navController = navController)
 
                 }
                 composable(route = AppPages.ArtistCataloguePage.route) {

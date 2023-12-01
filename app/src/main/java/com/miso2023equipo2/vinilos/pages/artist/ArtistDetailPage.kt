@@ -92,7 +92,7 @@ fun ArtistDetailPage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp)
-                        .background(color = MaterialTheme.colorScheme.outline),
+                        .background(color = MaterialTheme.colorScheme.outlineVariant),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {

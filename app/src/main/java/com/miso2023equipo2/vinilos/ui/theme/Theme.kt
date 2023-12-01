@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.ui.theme
 
-import android.R
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -16,9 +15,9 @@ private val darkAppColorScheme = darkColorScheme(
     primary = Purple400,
     secondary = Purple300,
     tertiary = Purple500,
-    outline = Purple100,
+    outlineVariant = Purple400,
     onPrimary = White,
-    primaryContainer = Purple200,
+    primaryContainer = Purple400,
 
 )
 
@@ -26,7 +25,7 @@ private val lightAppColorScheme = lightColorScheme(
     primary = Purple400,
     secondary = Purple300,
     tertiary = Purple500,
-    outline = Purple100,
+    outlineVariant = Purple100,
     onPrimary = TextBlack,
     primaryContainer = Purple200,
 
