@@ -1,6 +1,7 @@
 package com.miso2023equipo2.vinilos.fake
 
 import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
@@ -14,6 +15,10 @@ class FakeVinylsApiService : VinylsApiServiceAdapter {
         val index = id.toInt() - 1
         if (index > 2 || index < 1) return FakeDataSource.albumList[0]
         return FakeDataSource.albumList[index]
+    }
+
+    override suspend fun createAlbum(album: AlbumCreate): Album {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getArtists(): List<Artist> {

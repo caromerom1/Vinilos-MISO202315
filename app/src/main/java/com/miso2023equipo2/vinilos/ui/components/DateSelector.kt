@@ -7,7 +7,9 @@ import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.miso2023equipo2.vinilos.R
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -42,7 +44,7 @@ fun DateSelector(
             VinylsButton(
                 onClick = { onDismiss() },
                 type = ButtonType.TERTIARY,
-                label = "Cancel",
+                label = stringResource(id = R.string.button_cancel),
                 modifier = Modifier
             )
         }

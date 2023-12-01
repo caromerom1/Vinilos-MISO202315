@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
@@ -96,11 +97,11 @@ fun AlbumCreatePage(
         ) {
 
             VinylsButton(
-                label = "Guardar",
+                label = stringResource(id = R.string.button_save),
                 onClick = {
                     Toast.makeText(
                         navController.context,
-                        "Creando álbum...",
+                        "Album creado",
                         Toast.LENGTH_SHORT
                     ).show()
                     albumCreateViewModel.createAlbum(
@@ -121,7 +122,7 @@ fun AlbumCreatePage(
             Spacer(modifier = Modifier.size(32.dp))
 
             VinylsButton(
-                label = "Cancelar",
+                label = stringResource(id = R.string.button_cancel),
                 onClick = { navController.popBackStack() },
                 type = ButtonType.SECONDARY,
             )
@@ -158,28 +159,27 @@ fun FormLayout(
     ) {
         OutlinedTextField(
             value = name.value,
-            placeholder = { Text("Nombre del álbum") },
+            placeholder = { Text(stringResource(id = R.string.create_album_name_placeholder))},
             onValueChange = { newText -> name.value = newText },
             singleLine = true,
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
-            label = { Text(text = "Nombre") },
+            label = { Text(stringResource(id = R.string.create_album_name)) },
             isError = false,
 
             )
         OutlinedTextField(
             value = description.value,
-            placeholder = { Text("Descripción del álbum") },
+            placeholder = { Text(stringResource(id = R.string.create_album_description_placeholder)) },
             onValueChange = { newText -> description.value = newText },
             singleLine = false,
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
-            label = { Text(text = "Descripción") },
+            label = { Text(stringResource(id = R.string.create_album_description)) },
             isError = false,
         )
 
         OutlinedTextField(
-
             value = date.value,
             onValueChange = { },
             singleLine = true,
@@ -196,7 +196,7 @@ fun FormLayout(
                         .clickable(onClick = { isSelectingDate.value = true })
                 )
             },
-            label = { Text(text = "Fecha de lanzamiento") },
+            label = { Text(stringResource(id = R.string.create_album_release_date)) },
             isError = false,
             readOnly = true,
             enabled = false,
@@ -217,7 +217,7 @@ fun FormLayout(
             OutlinedTextField(
                 value = genre.value, onValueChange = {},
                 readOnly = true,
-                placeholder = { Text("Género") },
+                placeholder = { Text(stringResource(id = R.string.create_album_genre_placeholder)) },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded.value) },
                 shape = MaterialTheme.shapes.large,
                 modifier = Modifier
