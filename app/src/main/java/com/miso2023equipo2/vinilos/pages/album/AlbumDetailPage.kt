@@ -40,7 +40,7 @@ fun AlbumDetailPage(
             val album = albumDetailUiState.data
 
             val details = listOf(
-                ItemDetail(stringResource(id = R.string.detail_album_label_name), album.name),
+                ItemDetail(stringResource(id = R.string.detail_label_name), album.name),
                 ItemDetail(
                     stringResource(id = R.string.detail_album_label_description),
                     album.description

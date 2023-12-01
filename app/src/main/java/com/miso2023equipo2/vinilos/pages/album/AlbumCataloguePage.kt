@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -53,11 +54,13 @@ fun AlbumCataloguePage(
 
             }
             Column(
+                modifier = Modifier
+                    .fillMaxHeight(),
                 verticalArrangement = Arrangement.spacedBy((-62).dp),
             ) {
 
                 Box {
-                    VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton)
+                    VinylsList(listItems = listItem, onClickItem = onDetailAlbumButton, modifier = Modifier.fillMaxHeight())
                 }
 
                 if (user?.role != User.Collector.role) {
