@@ -49,6 +49,7 @@ data class AlbumCreatePageState(
     val description: MutableState<String>,
     val date: MutableState<String>,
     val genre: MutableState<String>,
+    val cover: MutableState<String> = mutableStateOf(""),
 )
 
 @Composable
@@ -63,6 +64,7 @@ fun AlbumCreatePage(
         description = remember { mutableStateOf("") },
         date = remember { mutableStateOf("") },
         genre = remember { mutableStateOf("") },
+        cover = remember { mutableStateOf("") },
     )
     Column(
         modifier = Modifier
@@ -110,7 +112,7 @@ fun AlbumCreatePage(
                             description = formState.description.value,
                             releaseDate = formState.date.value,
                             genre = formState.genre.value,
-                            cover = "test-cover",
+                            cover = formState.cover.value,
                             recordLabel = "Sony Music"
                         ),
                         navController
@@ -150,7 +152,7 @@ fun FormLayout(
 
     val genreOptions = listOf("Classical", "Salsa", "Rock", "Folk")
 
-    val (name, description, date, genre) = formState
+    val (name, description, date, genre, cover) = formState
 
     Column(
         verticalArrangement = Arrangement.spacedBy(mediumPadding),
@@ -168,6 +170,16 @@ fun FormLayout(
             isError = false,
 
             )
+        OutlinedTextField(
+            value = cover.value,
+            placeholder = { Text(stringResource(id = R.string.create_album_cover_placeholder)) },
+            onValueChange = { newText -> cover.value = newText },
+            singleLine = false,
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text(stringResource(id = R.string.create_album_cover)) },
+            isError = false,
+        )
         OutlinedTextField(
             value = description.value,
             placeholder = { Text(stringResource(id = R.string.create_album_description_placeholder)) },
