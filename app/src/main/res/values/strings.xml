@@ -39,4 +39,6 @@
     <string name="button_cancel">Cancelar</string>
     <string name="HomePage_start_message">¿Cómo desea iniciar la aplicación?</string>
     <string name="exit">Salir</string>
+    <string name="create_album_cover">Portada del álbum</string>
+    <string name="create_album_cover_placeholder">Portada</string>
 </resources>
