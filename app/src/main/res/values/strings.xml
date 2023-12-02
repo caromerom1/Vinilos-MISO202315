@@ -37,8 +37,15 @@
     <string name="create_album_genre_placeholder">Género</string>
     <string name="button_save">Guardar</string>
     <string name="button_cancel">Cancelar</string>
-    <string name="HomePage_start_message">¿Cómo desea iniciar la aplicación?</string>
+    <string name="home_start_message">¿Cómo desea iniciar la aplicación?</string>
     <string name="exit">Salir</string>
     <string name="create_album_cover">Portada del álbum</string>
     <string name="create_album_cover_placeholder">Portada</string>
+    <string name="detail_album_label_comments">Comentarios</string>
+    <string name="album_created_toast">Álbum creado</string>
+    <string name="album_creation_failed_toast">Error al crear álbum</string>
+    <string name="comment_created_toast">Comentario creado</string>
+    <string name="comment_create_failed_toast">Error al crear comentario</string>
+    <string name="create_comment_rating_placeholder">Puntuación</string>
+    <string name="comment_button_label">Comentar</string>
 </resources>

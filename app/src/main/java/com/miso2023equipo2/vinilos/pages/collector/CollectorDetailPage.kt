@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.DataFetchStates
@@ -32,7 +32,7 @@ import com.miso2023equipo2.vinilos.ui.components.ItemDetail
 
 @Composable
 fun CollectorDetailPage(
-    uiState: DataUiState<Pair<Collector, List<Album>>>
+    uiState: DataUiState<Pair<Collector, List<AlbumDetail>>>
 ) {
     Column(
         modifier = Modifier

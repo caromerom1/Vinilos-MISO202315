@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.pages.collector
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.miso2023equipo2.vinilos.VinylosApplication
+import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
@@ -49,7 +48,7 @@ class CollectorCatalogueViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[APPLICATION_KEY] as VinylosApplication)
+                val application = (this[APPLICATION_KEY] as App)
                 val collectorsRepository = application.container.collectorRepository
                 CollectorCatalogueViewModel(collectorsRepository = collectorsRepository)
             }

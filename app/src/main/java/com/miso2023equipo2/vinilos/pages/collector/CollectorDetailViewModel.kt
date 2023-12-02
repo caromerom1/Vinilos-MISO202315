@@ -8,9 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.miso2023equipo2.vinilos.VinylosApplication
-import com.miso2023equipo2.vinilos.data.model.Album
-import com.miso2023equipo2.vinilos.data.model.Artist
+import com.miso2023equipo2.vinilos.App
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
@@ -24,7 +23,7 @@ class CollectorDetailViewModel(
     private val collectorsRepository: CollectorRepository,
     private val albumsRepository: AlbumsRepository,
 ) : ViewModel() {
-    var uiState: DataUiState<Pair<Collector, List<Album>>> by mutableStateOf(DataUiState.Loading)
+    var uiState: DataUiState<Pair<Collector, List<AlbumDetail>>> by mutableStateOf(DataUiState.Loading)
 
 
     fun getCollector(id: String) {
@@ -32,7 +31,7 @@ class CollectorDetailViewModel(
             uiState = try {
                 val collector = collectorsRepository.getCollector(id)
                 val collectorAlbums = collector.collectorAlbums.map { it.id }
-                val albums = mutableListOf<Album>()
+                val albums = mutableListOf<AlbumDetail>()
 
                 collectorAlbums.forEach {
                     val album = albumsRepository.getAlbum(it.toString())
@@ -56,7 +55,7 @@ class CollectorDetailViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application =
-                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as App)
                 val collectorsRepository = application.container.collectorRepository
                 val albumsRepository = application.container.albumsRepository
                 CollectorDetailViewModel(

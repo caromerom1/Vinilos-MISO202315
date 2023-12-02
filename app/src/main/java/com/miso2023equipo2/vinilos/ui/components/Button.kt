@@ -74,7 +74,7 @@ fun VinylsButton(
         onClick = onClick, colors = ButtonDefaults.buttonColors(
             containerColor = when (type) {
                 ButtonType.PRIMARY -> MaterialTheme.colorScheme.primary
-                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primary
+                ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.primaryContainer
                 else -> Color.Transparent
             }, contentColor = when (type) {
                 ButtonType.PRIMARY -> White
@@ -97,6 +97,7 @@ fun ButtonContent(icon: ImageVector?, label: String?, type: ButtonType) {
     if (icon != null) {
         val color = when (type) {
             ButtonType.PRIMARY -> White
+            ButtonType.ALTERNATIVE -> MaterialTheme.colorScheme.tertiary
             else -> MaterialTheme.colorScheme.primary
         }
 
