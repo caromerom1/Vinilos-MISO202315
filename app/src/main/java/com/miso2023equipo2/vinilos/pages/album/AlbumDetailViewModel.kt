@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.miso2023equipo2.vinilos.VinylosApplication
+import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
@@ -42,7 +42,7 @@ class AlbumDetailViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application =
-                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as App)
                 val albumRepository = application.container.albumsRepository
                 AlbumDetailViewModel(albumsRepository = albumRepository)
             }

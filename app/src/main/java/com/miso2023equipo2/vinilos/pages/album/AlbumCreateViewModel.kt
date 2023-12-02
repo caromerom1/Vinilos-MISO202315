@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.Strings
-import com.miso2023equipo2.vinilos.VinylosApplication
+import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
@@ -61,7 +61,7 @@ class AlbumCreateViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[APPLICATION_KEY] as VinylosApplication)
+                val application = (this[APPLICATION_KEY] as App)
                 val albumRepository = application.container.albumsRepository
                 AlbumCreateViewModel(albumsRepository = albumRepository)
             }

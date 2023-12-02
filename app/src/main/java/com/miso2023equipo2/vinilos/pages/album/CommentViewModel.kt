@@ -12,7 +12,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.Strings
-import com.miso2023equipo2.vinilos.VinylosApplication
+import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.CommentCreate
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
@@ -64,7 +64,7 @@ class CommentViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application =
-                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as App)
                 val albumRepository = application.container.albumsRepository
                 CommentViewModel(albumsRepository = albumRepository)
             }
