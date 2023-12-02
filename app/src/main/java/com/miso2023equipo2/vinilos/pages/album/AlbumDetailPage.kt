@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.model.CommentCreate
 import com.miso2023equipo2.vinilos.data.model.CommentCreateCollector
 import com.miso2023equipo2.vinilos.navigation.User
@@ -87,7 +87,7 @@ fun AlbumDetailPage(
 }
 
 @Composable
-fun AlbumDetails(albumDetailUiState: DataUiState<Album>) {
+fun AlbumDetails(albumDetailUiState: DataUiState<AlbumDetail>) {
     if (albumDetailUiState !is DataUiState.Success) return
     val album = albumDetailUiState.data
 
@@ -149,7 +149,7 @@ fun CommentsHeader() {
 }
 
 @Composable
-fun CommentsSection(albumDetailUiState: DataUiState<Album>) {
+fun CommentsSection(albumDetailUiState: DataUiState<AlbumDetail>) {
 
     if (albumDetailUiState !is DataUiState.Success) return
     val comments = albumDetailUiState.data.comments

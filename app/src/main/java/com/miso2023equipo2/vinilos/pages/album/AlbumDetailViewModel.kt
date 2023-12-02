@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ import java.io.IOException
 class AlbumDetailViewModel(
     private val albumsRepository: AlbumsRepository
 ) : ViewModel() {
-    var uiState: DataUiState<Album> by mutableStateOf(DataUiState.Loading)
+    var uiState: DataUiState<AlbumDetail> by mutableStateOf(DataUiState.Loading)
 
     fun getAlbum(id: String) {
         viewModelScope.launch {

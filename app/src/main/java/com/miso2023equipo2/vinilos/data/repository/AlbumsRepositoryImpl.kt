@@ -2,6 +2,7 @@ package com.miso2023equipo2.vinilos.data.repository
 
 import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.AlbumCreate
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.model.Comment
 import com.miso2023equipo2.vinilos.data.model.CommentCreate
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
@@ -13,7 +14,7 @@ class AlbumsRepositoryImpl(
         return vinylsApiService.getAlbums()
     }
 
-    override suspend fun getAlbum(id: String): Album {
+    override suspend fun getAlbum(id: String): AlbumDetail {
         return vinylsApiService.getAlbum(id)
     }
 

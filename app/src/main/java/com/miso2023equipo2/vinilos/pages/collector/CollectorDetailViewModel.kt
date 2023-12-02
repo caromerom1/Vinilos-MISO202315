@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.miso2023equipo2.vinilos.App
 import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.model.Collector
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.data.repository.CollectorRepository
@@ -31,7 +32,7 @@ class CollectorDetailViewModel(
             uiState = try {
                 val collector = collectorsRepository.getCollector(id)
                 val collectorAlbums = collector.collectorAlbums.map { it.id }
-                val albums = mutableListOf<Album>()
+                val albums = mutableListOf<AlbumDetail>()
 
                 collectorAlbums.forEach {
                     val album = albumsRepository.getAlbum(it.toString())
