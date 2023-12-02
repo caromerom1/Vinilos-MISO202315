@@ -38,7 +38,7 @@
     <string name="create_album_genre_placeholder">Genre</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
-    <string name="home_start_message">How do you want to start the application?</string>
+    <string name="home_start_message">Start the applicaction as:</string>
     <string name="exit">Exit</string>
     <string name="create_album_cover">Album cover</string>
     <string name="create_album_cover_placeholder">Cover</string>
@@ -49,4 +49,5 @@
     <string name="comment_create_failed_toast">Error creating comment</string>
     <string name="create_comment_rating_placeholder">Rating</string>
     <string name="comment_button_label">Submit</string>
+    <string name="create_album_cover_image">Album cover</string>
 </resources>

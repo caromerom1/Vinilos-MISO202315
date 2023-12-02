@@ -24,7 +24,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,13 +54,18 @@ fun AlbumCreatePage(
 
 
         Image(
-            painter = painterResource(id = R.drawable.ic_add_photo_camera),
-            contentScale = ContentScale.Crop,
-            contentDescription = "camara add",
-            modifier = Modifier.size(100.dp)
-        )
+            painter = painterResource(id = R.drawable.vinyl),
+            contentDescription = stringResource(id = R.string.create_album_cover_image),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = 64.dp,
+                    bottom = 32.dp,
+                    start = 64.dp,
+                    end = 64.dp,
+                ),
 
-
+            )
 
         FormLayout(
             formState = albumCreateViewModel.formState,
