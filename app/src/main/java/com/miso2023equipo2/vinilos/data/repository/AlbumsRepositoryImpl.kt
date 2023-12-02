@@ -1,6 +1,7 @@
 package com.miso2023equipo2.vinilos.data.repository
 
 import com.miso2023equipo2.vinilos.data.model.Album
+import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.services.VinylsApiServiceAdapter
 
 class AlbumsRepositoryImpl(
@@ -12,5 +13,9 @@ class AlbumsRepositoryImpl(
 
     override suspend fun getAlbum(id: String): Album {
         return vinylsApiService.getAlbum(id)
+    }
+
+    override suspend fun createAlbum(album: AlbumCreate): Album {
+        return vinylsApiService.createAlbum(album)
     }
 }
