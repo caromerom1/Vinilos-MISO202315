@@ -24,7 +24,7 @@ class CollectorDetailViewModel(
     private val collectorsRepository: CollectorRepository,
     private val albumsRepository: AlbumsRepository,
 ) : ViewModel() {
-    var uiState: DataUiState<Pair<Collector, List<Album>>> by mutableStateOf(DataUiState.Loading)
+    var uiState: DataUiState<Pair<Collector, List<AlbumDetail>>> by mutableStateOf(DataUiState.Loading)
 
 
     fun getCollector(id: String) {
