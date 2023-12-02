@@ -21,7 +21,7 @@
     <string name="detail_label_name">Name</string>
     <string name="detail_label_phone">Telephone</string>
     <string name="detail_label_email">Email</string>
-    <string name="detail_album_label_description">Cescription</string>
+    <string name="detail_album_label_description">Description</string>
     <string name="detail_album_label_date">Release date</string>
     <string name="detail_artist_label_date">Creation date</string>
     <string name="detail_artist_label_albums">Favorite albums</string>

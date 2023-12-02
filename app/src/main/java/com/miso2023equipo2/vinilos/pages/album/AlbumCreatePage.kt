@@ -1,6 +1,5 @@
 package com.miso2023equipo2.vinilos.pages.album
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.Strings
 import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.navigation.AppPages
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState

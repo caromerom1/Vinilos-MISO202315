@@ -14,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.miso2023equipo2.vinilos.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
