@@ -16,9 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -40,11 +37,6 @@ import com.miso2023equipo2.vinilos.ui.components.DetailedList
 import com.miso2023equipo2.vinilos.ui.components.DropdownSelector
 import com.miso2023equipo2.vinilos.ui.components.ItemDetail
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
-
-data class AlbumCommentState(
-    val description: MutableState<String>,
-    val rating: MutableState<String>,
-)
 
 @Composable
 fun AlbumDetailPage(
@@ -173,11 +165,7 @@ fun AlbumComment(
     commentViewModel: CommentViewModel,
     navController: NavController
 ) {
-    val (description, rating) = AlbumCommentState(
-        description = remember { mutableStateOf("") },
-        rating = remember { mutableStateOf("") }
-    )
-
+    val (description, rating) = commentViewModel.formState
 
     if (commentViewModel.commentUiState is DataUiState.Success) {
         description.value = ""

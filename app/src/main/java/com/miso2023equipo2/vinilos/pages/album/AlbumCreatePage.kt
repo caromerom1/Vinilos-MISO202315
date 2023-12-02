@@ -20,7 +20,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,21 +31,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
-import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.navigation.AppPages
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.DateSelector
 import com.miso2023equipo2.vinilos.ui.components.DropdownSelector
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
-
-data class AlbumCreatePageState(
-    val name: MutableState<String>,
-    val description: MutableState<String>,
-    val date: MutableState<String>,
-    val genre: MutableState<String>,
-    val cover: MutableState<String> = mutableStateOf(""),
-)
 
 @Composable
 fun AlbumCreatePage(
@@ -55,13 +45,6 @@ fun AlbumCreatePage(
 ) {
     val mediumPadding = dimensionResource(id = R.dimen.padding_medium)
 
-    val formState = AlbumCreatePageState(
-        name = remember { mutableStateOf("") },
-        description = remember { mutableStateOf("") },
-        date = remember { mutableStateOf("") },
-        genre = remember { mutableStateOf("") },
-        cover = remember { mutableStateOf("") },
-    )
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -81,7 +64,7 @@ fun AlbumCreatePage(
 
 
         FormLayout(
-            formState = formState,
+            formState = albumCreateViewModel.formState,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -98,14 +81,6 @@ fun AlbumCreatePage(
                 label = stringResource(id = R.string.button_save),
                 onClick = {
                     albumCreateViewModel.createAlbum(
-                        AlbumCreate(
-                            name = formState.name.value,
-                            description = formState.description.value,
-                            releaseDate = formState.date.value,
-                            genre = formState.genre.value,
-                            cover = formState.cover.value,
-                            recordLabel = "Sony Music"
-                        ),
                         navController
                     )
                 },

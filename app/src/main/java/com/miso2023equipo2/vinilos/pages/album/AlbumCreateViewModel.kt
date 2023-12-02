@@ -1,6 +1,8 @@
 package com.miso2023equipo2.vinilos.pages.album
 
+import android.util.Log
 import android.widget.Toast
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -22,14 +24,40 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
+data class AlbumCreatePageState(
+    val name: MutableState<String>,
+    val description: MutableState<String>,
+    val date: MutableState<String>,
+    val genre: MutableState<String>,
+    val cover: MutableState<String>,
+)
+
 class AlbumCreateViewModel(
     private val albumsRepository: AlbumsRepository
 ) : ViewModel() {
     var uiState: DataUiState<Album> by mutableStateOf(DataUiState.Loading)
 
-    fun createAlbum(album: AlbumCreate, navController: NavController) {
+    var formState: AlbumCreatePageState by mutableStateOf(
+        AlbumCreatePageState(
+            name = mutableStateOf(""),
+            description = mutableStateOf(""),
+            date = mutableStateOf(""),
+            genre = mutableStateOf(""),
+            cover = mutableStateOf(""),
+        )
+    )
+
+    fun createAlbum(navController: NavController) {
         viewModelScope.launch {
             uiState = try {
+                val album = AlbumCreate(
+                    name = formState.name.value,
+                    description = formState.description.value,
+                    releaseDate = formState.date.value,
+                    genre = formState.genre.value,
+                    cover = formState.cover.value,
+                    recordLabel = "Sony Music"
+                )
                 val createResult = albumsRepository.createAlbum(album)
 
                 Toast.makeText(
