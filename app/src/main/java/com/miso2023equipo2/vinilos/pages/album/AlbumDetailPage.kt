@@ -151,7 +151,7 @@ fun CommentsSection(albumDetailUiState: DataUiState<AlbumDetail>) {
         val stars = "⭐".repeat(it.rating)
 
         Text(
-            modifier = Modifier.padding(),
+            modifier = Modifier.padding(16.dp),
             text = "${it.description} $stars️",
         )
     }
@@ -176,7 +176,10 @@ fun AlbumComment(
         albumDetailViewModel.getAlbum(id = albumId)
     }
 
-    Column(horizontalAlignment = Alignment.End) {
+    Column(
+        horizontalAlignment = Alignment.End,
+        modifier = Modifier.padding(horizontal = 32.dp)
+    ) {
         DropdownSelector(
             value = rating.value,
             placeholder = R.string.create_comment_rating_placeholder,
