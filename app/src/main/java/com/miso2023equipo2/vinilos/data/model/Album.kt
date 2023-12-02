@@ -12,6 +12,7 @@ data class Album(
     @SerialName("genre") val genre: String,
     @SerialName("releaseDate") val releaseDate: String,
     @SerialName("recordLabel") val recordLabel: String,
+    @SerialName("comments") val comments: List<Comment>,
 )
 
 @Serializable

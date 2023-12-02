@@ -41,4 +41,5 @@
     <string name="exit">Salir</string>
     <string name="create_album_cover">Portada del álbum</string>
     <string name="create_album_cover_placeholder">Portada</string>
+    <string name="detail_album_label_comments">Comentarios</string>
 </resources>
