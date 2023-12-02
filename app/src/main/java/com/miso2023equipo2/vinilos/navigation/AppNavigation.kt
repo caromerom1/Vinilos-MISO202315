@@ -41,6 +41,7 @@ import com.miso2023equipo2.vinilos.pages.album.AlbumCreatePage
 import com.miso2023equipo2.vinilos.pages.album.AlbumCreateViewModel
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailPage
 import com.miso2023equipo2.vinilos.pages.album.AlbumDetailViewModel
+import com.miso2023equipo2.vinilos.pages.album.CommentViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCataloguePage
 import com.miso2023equipo2.vinilos.pages.artist.ArtistCatalogueViewModel
 import com.miso2023equipo2.vinilos.pages.artist.ArtistDetailPage
@@ -132,10 +133,17 @@ fun AppNavigation(
                     val albumDetailViewModel: AlbumDetailViewModel =
                         viewModel(factory = AlbumDetailViewModel.Factory)
 
+                    val commentViewModel: CommentViewModel =
+                        viewModel(factory = CommentViewModel.Factory)
+
                     albumDetailViewModel.getAlbum(albumId)
 
                     AlbumDetailPage(
-                        albumDetailUiState = albumDetailViewModel.uiState,
+                        user = uiState.user,
+                        albumDetailViewModel = albumDetailViewModel,
+                        commentViewModel = commentViewModel,
+                        albumId = albumId,
+                        navController = navController,
                     )
                 }
                 composable(

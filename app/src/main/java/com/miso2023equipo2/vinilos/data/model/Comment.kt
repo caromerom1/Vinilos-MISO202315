@@ -9,3 +9,15 @@ data class Comment(
     @SerialName("description") val description: String,
     @SerialName("rating") val rating: Int,
 )
+
+@Serializable
+data class CommentCreate(
+    @SerialName("description") val description: String,
+    @SerialName("rating") val rating: Int,
+    @SerialName("collector") val collector: CommentCreateCollector,
+)
+
+@Serializable
+data class CommentCreateCollector(
+    @SerialName("id") val id: Int
+)

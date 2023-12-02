@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -14,43 +13,46 @@ import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
 import com.miso2023equipo2.vinilos.Strings
 import com.miso2023equipo2.vinilos.VinylosApplication
-import com.miso2023equipo2.vinilos.data.model.Album
-import com.miso2023equipo2.vinilos.data.model.AlbumCreate
+import com.miso2023equipo2.vinilos.data.model.CommentCreate
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepository
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class AlbumCreateViewModel(
-    private val albumsRepository: AlbumsRepository
+class CommentViewModel(
+    private val albumsRepository: AlbumsRepository,
 ) : ViewModel() {
-    var uiState: DataUiState<Album> by mutableStateOf(DataUiState.Loading)
+    var commentUiState: DataUiState<CommentCreate> by mutableStateOf(DataUiState.Loading)
 
-    fun createAlbum(album: AlbumCreate, navController: NavController) {
+    fun commentAlbum(
+        albumId: String,
+        comment: CommentCreate,
+        navController: NavController,
+    ) {
         viewModelScope.launch {
-            uiState = try {
-                val createResult = albumsRepository.createAlbum(album)
-
+            commentUiState = try {
+                val response = albumsRepository.commentAlbum(albumId, comment)
                 Toast.makeText(
                     navController.context,
-                    Strings.get(R.string.album_created_toast),
+                    Strings.get(R.string.comment_created_toast),
                     Toast.LENGTH_SHORT
                 ).show()
+
                 DataUiState.Success(
-                    createResult
+                    response
                 )
             } catch (e: IOException) {
                 Toast.makeText(
                     navController.context,
-                    Strings.get(R.string.album_creation_failed_toast),
+                    Strings.get(R.string.comment_create_failed_toast),
                     Toast.LENGTH_SHORT
                 ).show()
                 DataUiState.Error
             } catch (e: HttpException) {
                 Toast.makeText(
                     navController.context,
-                    Strings.get(R.string.album_creation_failed_toast),
+                    Strings.get(R.string.comment_create_failed_toast),
                     Toast.LENGTH_SHORT
                 ).show()
                 DataUiState.Error
@@ -61,10 +63,12 @@ class AlbumCreateViewModel(
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[APPLICATION_KEY] as VinylosApplication)
+                val application =
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
                 val albumRepository = application.container.albumsRepository
-                AlbumCreateViewModel(albumsRepository = albumRepository)
+                CommentViewModel(albumsRepository = albumRepository)
             }
         }
     }
+
 }

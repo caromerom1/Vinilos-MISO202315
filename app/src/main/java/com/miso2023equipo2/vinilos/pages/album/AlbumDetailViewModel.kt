@@ -1,7 +1,6 @@
 package com.miso2023equipo2.vinilos.pages.album
 
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -38,12 +37,14 @@ class AlbumDetailViewModel(
             }
         }
     }
+
     companion object {
-        val Factory: ViewModelProvider.Factory= viewModelFactory {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application=(this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
-                val albumRepository=application.container.albumsRepository
-                AlbumDetailViewModel(albumsRepository=albumRepository)
+                val application =
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as VinylosApplication)
+                val albumRepository = application.container.albumsRepository
+                AlbumDetailViewModel(albumsRepository = albumRepository)
             }
         }
     }

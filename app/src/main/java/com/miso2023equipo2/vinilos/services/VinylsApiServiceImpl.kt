@@ -4,6 +4,8 @@ import com.miso2023equipo2.vinilos.data.model.Album
 import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.data.model.Artist
 import com.miso2023equipo2.vinilos.data.model.Collector
+import com.miso2023equipo2.vinilos.data.model.Comment
+import com.miso2023equipo2.vinilos.data.model.CommentCreate
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -18,7 +20,10 @@ interface VinylsApiServiceImpl : VinylsApiServiceAdapter {
     override suspend fun getAlbum(@Path("id") id: String): Album
 
     @POST("/albums")
-    override suspend fun createAlbum(@Body album: AlbumCreate): Album
+    override suspend fun createAlbum(@Body album: AlbumCreate): AlbumCreate
+
+    @POST("/albums/{id}/comments")
+    override suspend fun commentAlbum(@Path("id") id: String, @Body comment: CommentCreate): Comment
 
     @GET("/bands")
     override suspend fun getArtists(): List<Artist>

@@ -15,10 +15,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -37,11 +33,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.miso2023equipo2.vinilos.R
+import com.miso2023equipo2.vinilos.Strings
 import com.miso2023equipo2.vinilos.data.model.AlbumCreate
 import com.miso2023equipo2.vinilos.navigation.AppPages
 import com.miso2023equipo2.vinilos.navigation.state.DataUiState
 import com.miso2023equipo2.vinilos.ui.components.ButtonType
 import com.miso2023equipo2.vinilos.ui.components.DateSelector
+import com.miso2023equipo2.vinilos.ui.components.DropdownSelector
 import com.miso2023equipo2.vinilos.ui.components.VinylsButton
 
 data class AlbumCreatePageState(
@@ -101,11 +99,6 @@ fun AlbumCreatePage(
             VinylsButton(
                 label = stringResource(id = R.string.button_save),
                 onClick = {
-                    Toast.makeText(
-                        navController.context,
-                        "Album creado",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     albumCreateViewModel.createAlbum(
                         AlbumCreate(
                             name = formState.name.value,
@@ -140,7 +133,6 @@ fun AlbumCreatePage(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormLayout(
     modifier: Modifier = Modifier,
@@ -148,7 +140,6 @@ fun FormLayout(
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
     val isSelectingDate = remember { mutableStateOf(false) }
-    val expanded = remember { mutableStateOf(false) }
 
     val genreOptions = listOf("Classical", "Salsa", "Rock", "Folk")
 
@@ -161,7 +152,7 @@ fun FormLayout(
     ) {
         OutlinedTextField(
             value = name.value,
-            placeholder = { Text(stringResource(id = R.string.create_album_name_placeholder))},
+            placeholder = { Text(stringResource(id = R.string.create_album_name_placeholder)) },
             onValueChange = { newText -> name.value = newText },
             singleLine = true,
             shape = MaterialTheme.shapes.large,
@@ -223,34 +214,14 @@ fun FormLayout(
             )
         )
 
-        ExposedDropdownMenuBox(
-            expanded = expanded.value,
-            onExpandedChange = { expanded.value = !expanded.value }) {
-            OutlinedTextField(
-                value = genre.value, onValueChange = {},
-                readOnly = true,
-                placeholder = { Text(stringResource(id = R.string.create_album_genre_placeholder)) },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded.value) },
-                shape = MaterialTheme.shapes.large,
-                modifier = Modifier
-                    .menuAnchor()
-                    .fillMaxWidth()
-            )
-            ExposedDropdownMenu(
-                expanded = expanded.value,
-                onDismissRequest = { expanded.value = false }) {
-                genreOptions.forEach { genreOption ->
-                    DropdownMenuItem(
-                        onClick = {
-                            genre.value = genreOption
-                            expanded.value = false
-                        },
-                        text = { Text(text = genreOption) },
-                    )
-                }
-
+        DropdownSelector(
+            value = genre.value,
+            placeholder = R.string.create_album_genre_placeholder,
+            options = genreOptions,
+            onValueChange = {
+                genre.value = it
             }
-        }
+        )
 
 
         if (isSelectingDate.value) {
