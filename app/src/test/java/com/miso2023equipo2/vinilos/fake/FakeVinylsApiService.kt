@@ -16,8 +16,30 @@ class FakeVinylsApiService : VinylsApiServiceAdapter {
 
     override suspend fun getAlbum(id: String): AlbumDetail {
         val index = id.toInt() - 1
-        if (index > 2 || index < 1) return FakeDataSource.albumList[0].toAlbumDetail()
-        return FakeDataSource.albumList[index].toAlbumDetail()
+        if (index > 2 || index < 1) {
+            val album = FakeDataSource.albumList[0]
+            return AlbumDetail(
+                id = album.id,
+                name = album.name,
+                cover = album.cover,
+                description = album.description,
+                genre = album.genre,
+                releaseDate = album.releaseDate,
+                recordLabel = album.recordLabel,
+                comments = listOf()
+            )
+        }
+        val album = FakeDataSource.albumList[index]
+        return AlbumDetail(
+            id = album.id,
+            name = album.name,
+            cover = album.cover,
+            description = album.description,
+            genre = album.genre,
+            releaseDate = album.releaseDate,
+            recordLabel = album.recordLabel,
+            comments = listOf()
+        )
     }
 
     override suspend fun createAlbum(album: AlbumCreate): AlbumCreate {
