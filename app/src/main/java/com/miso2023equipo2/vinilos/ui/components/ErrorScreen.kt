@@ -22,7 +22,7 @@ fun ErrorScreen(@StringRes message:Int, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = "Error"
         )
         Text(text = stringResource(message), modifier = Modifier.padding(16.dp))
     }

@@ -45,7 +45,7 @@ fun HomePage(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize(),
     ) {
-        Text("¿Cómo desea iniciar la aplicación?", fontWeight = FontWeight.Bold)
+        Text(stringResource(id = R.string.home_start_message), fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(32.dp))
         VinylsButton(
             onClick = onClickCollectorButton,

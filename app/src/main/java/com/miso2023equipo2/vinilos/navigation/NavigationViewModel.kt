@@ -19,6 +19,12 @@ class NavigationViewModel : ViewModel() {
             currentState.copy(icon = icon,iconDescription= R.string.principal_menu_icon)
         }
     }
+    fun logIn(user:User){
+        _uiState.update{
+            currentState->
+            currentState.copy(logged = true,user=user)
+        }
+    }
 
 
 }

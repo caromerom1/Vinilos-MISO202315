@@ -1,5 +1,6 @@
 package com.miso2023equipo2.vinilos.repository
 
+import com.miso2023equipo2.vinilos.data.model.AlbumDetail
 import com.miso2023equipo2.vinilos.data.repository.AlbumsRepositoryImpl
 import com.miso2023equipo2.vinilos.fake.FakeDataSource
 import com.miso2023equipo2.vinilos.fake.FakeVinylsApiService
@@ -25,7 +26,20 @@ class AlbumsRepositoryTest {
             val repository = AlbumsRepositoryImpl(
                 vinylsApiService = FakeVinylsApiService()
             )
-            assertEquals(FakeDataSource.albumList[0], repository.getAlbum("1"))
+
+            val album = FakeDataSource.albumList[0]
+
+            val albumDetail = AlbumDetail(
+                id = album.id,
+                name = album.name,
+                cover = album.cover,
+                description = album.description,
+                genre = album.genre,
+                releaseDate = album.releaseDate,
+                recordLabel = album.recordLabel,
+                comments = listOf()
+            )
+            assertEquals(albumDetail, repository.getAlbum("1"))
         }
     }
 }

@@ -20,7 +20,7 @@ interface AppContainer {
 }
 
 class DefaultAppContainer : AppContainer {
-    private val baseUrl = "https://vinils-backend.onrender.com"
+    private val baseUrl = "https://back-vinyls.onrender.com"
 
     private val json = Json {
         ignoreUnknownKeys = true

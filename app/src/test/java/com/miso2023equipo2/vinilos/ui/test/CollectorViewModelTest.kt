@@ -12,18 +12,16 @@ import org.junit.Test
 
 class CollectorViewModelTest {
     @get:Rule
-    val testDispatcher= TestDispatcherRule()
-
+    val testDispatcher = TestDispatcherRule()
 
 
     @Test
-    fun validUiStateSuccess()= runTest{
+    fun validUiStateSuccess() = runTest {
         val collectorCatalogueViewModel = CollectorCatalogueViewModel(
             collectorsRepository = FakeNetworkCollectorRepository()
         )
         val listResult = FakeDataSource.collectorList
         assertEquals(
-
             DataUiState.Success(listResult),
             collectorCatalogueViewModel.uiState
         )
