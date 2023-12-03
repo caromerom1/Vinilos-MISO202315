@@ -12,7 +12,8 @@ object FakeDataSource {
             "https://www.udiscovermusic.com/wp-content/uploads/2017/03/Metallica-Ride-The-Lightning-album-cover-web-optimised-820.jpg",
             "Esta es la description fake del album",
             "Metal",
-            "1999-01-01"
+            "1999-01-01",
+            "Sony Music"
         ),
         Album(
             2,
@@ -20,7 +21,8 @@ object FakeDataSource {
             "https://www.udiscovermusic.com/wp-content/uploads/2017/03/Metallica-Ride-The-Lightning-album-cover-web-optimised-820.jpg",
             "Esta es la description fake del album",
             "Metal",
-            "1999-01-01"
+            "1999-01-01",
+            "Sony Music"
         ),
         Album(
             3,
@@ -28,7 +30,8 @@ object FakeDataSource {
             "https://www.udiscovermusic.com/wp-content/uploads/2017/03/Metallica-Ride-The-Lightning-album-cover-web-optimised-820.jpg",
             "Esta es la description fake del album",
             "Metal",
-            "1999-01-01"
+            "1999-01-01",
+            "Sony Music"
         ),
     )
 
@@ -65,18 +68,24 @@ object FakeDataSource {
             name = "Juan",
             phone = "123456789",
             email = "test@test.com",
+            collectorAlbums = emptyList(),
+            favoritePerformers = emptyList(),
         ),
         Collector(
             id = 2,
             name = "Alimaña",
             phone = "987654321",
             email = "test2@test.com",
+            collectorAlbums = emptyList(),
+            favoritePerformers = emptyList(),
         ),
         Collector(
             id = 3,
             name = "Juanito",
             phone = "123123123",
             email = "test3@test.com",
+            collectorAlbums = emptyList(),
+            favoritePerformers = emptyList(),
         ),
     )
 }

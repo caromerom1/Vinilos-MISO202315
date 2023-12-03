@@ -70,6 +70,19 @@ class CollectorTest {
         TestCase.assertEquals("Pedro Navaja", collector.text)
     }
 
+    @Test
+    fun checkArtistDetail() {
+        pageObject.navigateToCollectors()
+
+        val collector = device.wait(Until.findObject(By.clickable(true)), timeout)
+        collector.click()
+        val detailTitle = device.wait(Until.findObject(By.text("Detalle Coleccionista")), timeout)
+        val scrollView =
+            device.wait(Until.findObject(By.clazz("android.widget.ScrollView")), timeout)
+
+        TestCase.assertEquals(9, scrollView.childCount)
+        TestCase.assertEquals("Detalle Coleccionista", detailTitle.text)
+    }
     /**
      * Run after each method with @Test annotation
      */
