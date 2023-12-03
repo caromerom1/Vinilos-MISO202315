@@ -12,7 +12,20 @@ data class Album(
     @SerialName("genre") val genre: String,
     @SerialName("releaseDate") val releaseDate: String,
     @SerialName("recordLabel") val recordLabel: String,
-)
+) {
+    fun toAlbumDetail(): AlbumDetail {
+        return AlbumDetail(
+            id = this.id,
+            name = this.name,
+            cover = this.cover,
+            description = this.description,
+            genre = this.genre,
+            releaseDate = this.releaseDate,
+            recordLabel = this.recordLabel,
+            comments = listOf(),
+        )
+    }
+}
 
 @Serializable
 data class AlbumDetail(
